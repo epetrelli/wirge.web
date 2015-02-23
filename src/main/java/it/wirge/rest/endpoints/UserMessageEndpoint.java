@@ -1,13 +1,17 @@
 package it.wirge.rest.endpoints;
 
-import it.wirge.data.dao.UserMessageDao;
+import com.googlecode.objectify.Key;
 import it.wirge.data.model.UserMessage;
+import org.restlet.Response;
+import org.restlet.data.Status;
+import org.restlet.resource.ResourceException;
 import org.restlet.resource.ServerResource;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import java.util.List;
 
+import static com.googlecode.objectify.ObjectifyService.ofy;
 
 @Path("/usermessages")
 public class UserMessageEndpoint extends ServerResource {
@@ -15,17 +19,17 @@ public class UserMessageEndpoint extends ServerResource {
   @GET
   @Produces({MediaType.APPLICATION_JSON})
   public List<UserMessage> findAll() {
-    UserMessageDao userMessageDao = new UserMessageDao();
-    List<UserMessage> userMessages = userMessageDao.findAll();
-    return userMessages;
+    return ofy().load().type(UserMessage.class).list();
   }
 
   @GET
   @Path("{id}")
   @Produces({MediaType.APPLICATION_JSON})
   public UserMessage findById(@PathParam("id") Long id) {
-    UserMessageDao userMessageDao = new UserMessageDao();
-    UserMessage userMessage = userMessageDao.findById(id);
+    UserMessage userMessage = ofy().load().key(Key.create(UserMessage.class, id)).now();
+    if(userMessage==null) {
+      throw new ResourceException(Status.CLIENT_ERROR_NOT_FOUND);
+    }
     return userMessage;
   }
 
@@ -33,38 +37,21 @@ public class UserMessageEndpoint extends ServerResource {
   @Consumes({MediaType.APPLICATION_JSON})
   @Produces({MediaType.APPLICATION_JSON})
   public UserMessage create(UserMessage userMessage) {
-    UserMessage userMessageOut;
-    UserMessageDao userMessageDao = new UserMessageDao();
-    userMessageOut = userMessageDao.save(userMessage);
-    return userMessageOut;
+    ofy().save().entity(userMessage).now();
+    return userMessage;
   }
 
   @PUT
-  @Path("{id}")
   @Consumes({MediaType.APPLICATION_JSON})
   @Produces({MediaType.APPLICATION_JSON})
-  public UserMessage update(@PathParam("id") Long id, UserMessage userMessage) {
-
-    if (!id.equals(userMessage.getId()))
-      return null;
-
-    UserMessage userMessageOut;
-    UserMessageDao userMessageDao = new UserMessageDao();
-    userMessageOut = userMessageDao.save(userMessage);
-
-    return userMessageOut;
+  public UserMessage update(UserMessage userMessage) {
+    return create(userMessage);
   }
 
   @DELETE
-  @Path("{id}")
   @Consumes({MediaType.APPLICATION_JSON})
   @Produces({MediaType.APPLICATION_JSON})
-  public void remove(@PathParam("id") Long id, UserMessage userMessage) {
-
-    if (!id.equals(userMessage.getId()))
-      return;
-
-    UserMessageDao userMessageDao = new UserMessageDao();
-    userMessageDao.delete(userMessage);
+  public void remove(UserMessage userMessage) {
+    ofy().delete().entity(userMessage).now();
   }
 }
