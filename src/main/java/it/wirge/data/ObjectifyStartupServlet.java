@@ -8,23 +8,19 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.logging.Logger;
 
 /**
  * Created by enricopetrelli on 23/02/15.
  */
 public class ObjectifyStartupServlet extends HttpServlet {
 
+  private static final Logger logger = Logger.getLogger(ObjectifyStartupServlet.class.getName());
+
+  // Registers classes for data storage
   static {
     ObjectifyService.register(UserMessage.class);
+    logger.info("ObjectifyService created");
   }
 
-  @Override
-  protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
-  }
-
-  @Override
-  protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
-  }
 }

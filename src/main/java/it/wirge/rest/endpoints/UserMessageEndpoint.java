@@ -1,5 +1,7 @@
 package it.wirge.rest.endpoints;
 
+import com.google.appengine.api.users.UserService;
+import com.google.appengine.api.users.UserServiceFactory;
 import com.googlecode.objectify.Key;
 import it.wirge.data.model.UserMessage;
 import org.restlet.Response;
@@ -26,6 +28,12 @@ public class UserMessageEndpoint extends ServerResource {
   @Path("{id}")
   @Produces({MediaType.APPLICATION_JSON})
   public UserMessage findById(@PathParam("id") Long id) {
+
+    // Admins only
+    UserService userService = UserServiceFactory.getUserService();
+    if(!userService.isUserLoggedIn() || !userService.isUserAdmin())
+      throw new ResourceException(Status.CLIENT_ERROR_FORBIDDEN);
+
     UserMessage userMessage = ofy().load().key(Key.create(UserMessage.class, id)).now();
     if(userMessage==null) {
       throw new ResourceException(Status.CLIENT_ERROR_NOT_FOUND);
@@ -45,6 +53,12 @@ public class UserMessageEndpoint extends ServerResource {
   @Consumes({MediaType.APPLICATION_JSON})
   @Produces({MediaType.APPLICATION_JSON})
   public UserMessage update(UserMessage userMessage) {
+
+    // Admins only
+    UserService userService = UserServiceFactory.getUserService();
+    if(!userService.isUserLoggedIn() || !userService.isUserAdmin())
+      throw new ResourceException(Status.CLIENT_ERROR_FORBIDDEN);
+
     return create(userMessage);
   }
 
@@ -52,6 +66,12 @@ public class UserMessageEndpoint extends ServerResource {
   @Consumes({MediaType.APPLICATION_JSON})
   @Produces({MediaType.APPLICATION_JSON})
   public void remove(UserMessage userMessage) {
+
+    // Admins only
+    UserService userService = UserServiceFactory.getUserService();
+    if(!userService.isUserLoggedIn() || !userService.isUserAdmin())
+      throw new ResourceException(Status.CLIENT_ERROR_FORBIDDEN);
+
     ofy().delete().entity(userMessage).now();
   }
 }

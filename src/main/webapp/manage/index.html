@@ -7,17 +7,17 @@
   <meta name="viewport" content="width=device-width">
   <!-- build:css(.) styles/vendor.css -->
   <!-- bower:css -->
-  <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css" />
-  <link rel="stylesheet" href="bower_components/leaflet/dist/leaflet.css" />
+  <link rel="stylesheet" href="/bower_components/bootstrap/dist/css/bootstrap.css" />
+  <link rel="stylesheet" href="/bower_components/leaflet/dist/leaflet.css" />
   <!-- endbower -->
   <!-- endbuild -->
 
   <!-- build:css(.tmp) styles/main.css -->
-  <link rel="stylesheet" href="manage/styles/main.css">
+  <link rel="stylesheet" href="/manage/styles/main.css">
   <!-- endbuild -->
 </head>
 
-<body>
+<body ng-app="WirgeManageApp">
 <div class="navbar-wrapper">
   <div class="container">
 
@@ -36,7 +36,7 @@
           <ul class="nav navbar-nav">
             <li class="active"><a href="#">Home</a></li>
             <li><a href="#about">About</a></li>
-            <li><a href="contact.html">Contact</a></li>
+            <li><a href="#/contacts">Contacts</a></li>
             <!--
             <li class="dropdown">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Dropdown <span class="caret"></span></a>
@@ -60,8 +60,8 @@
 </div>
 
 <div class="container">
-  ...
 
+  <div ng-view=""></div>
 
   <footer>
     <p class="pull-right"><a href="#">Inizio</a></p>
@@ -71,18 +71,27 @@
 
 <!-- build:js(.) scripts/vendor.js -->
 <!-- bower:js -->
-<script src="bower_components/jquery/dist/jquery.js"></script>
-<script src="bower_components/angular/angular.js"></script>
-<script src="bower_components/bootstrap/dist/js/bootstrap.js"></script>
-<script src="bower_components/angular-animate/angular-animate.js"></script>
-<script src="bower_components/angular-cookies/angular-cookies.js"></script>
-<script src="bower_components/angular-messages/angular-messages.js"></script>
-<script src="bower_components/angular-resource/angular-resource.js"></script>
-<script src="bower_components/angular-route/angular-route.js"></script>
-<script src="bower_components/angular-sanitize/angular-sanitize.js"></script>
-<script src="bower_components/angular-touch/angular-touch.js"></script>
-<script src="bower_components/leaflet/dist/leaflet-src.js"></script>
+<script src="/bower_components/jquery/dist/jquery.js"></script>
+<script src="/bower_components/angular/angular.js"></script>
+<script src="/bower_components/bootstrap/dist/js/bootstrap.js"></script>
+<script src="/bower_components/angular-animate/angular-animate.js"></script>
+<script src="/bower_components/angular-cookies/angular-cookies.js"></script>
+<script src="/bower_components/angular-messages/angular-messages.js"></script>
+<script src="/bower_components/angular-resource/angular-resource.js"></script>
+<script src="/bower_components/angular-route/angular-route.js"></script>
+<script src="/bower_components/angular-sanitize/angular-sanitize.js"></script>
+<script src="/bower_components/angular-touch/angular-touch.js"></script>
+<script src="/bower_components/leaflet/dist/leaflet-src.js"></script>
 <!-- endbower -->
+<!-- endbuild -->
+
+<!-- build:js(.) scripts/app.js -->
+<script src="/manage/scripts/WirgeManageApp.js"></script>
+<script src="/manage/scripts/UrlsService.js"></script>
+<script src="/manage/scripts/services/UserMessageService.js"></script>
+<script src="/manage/scripts/controllers/UserMessageController.js"></script>
+<script src="/manage/scripts/controllers/UserMessagesController.js"></script>
+<script src="/manage/scripts/routers/UserMessageRouter.js"></script>
 <!-- endbuild -->
 
 </body>

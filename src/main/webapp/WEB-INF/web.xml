@@ -16,12 +16,12 @@
 
 
   <servlet>
-    <servlet-name>StartupServlet</servlet-name>
+    <servlet-name>ObjectifyStartupServlet</servlet-name>
     <servlet-class>it.wirge.data.ObjectifyStartupServlet</servlet-class>
     <load-on-startup>1</load-on-startup>
   </servlet>
   <servlet-mapping>
-    <servlet-name>StartupServlet</servlet-name>
+    <servlet-name>ObjectifyStartupServlet</servlet-name>
     <url-pattern>/objectify/*</url-pattern>
   </servlet-mapping>
 
