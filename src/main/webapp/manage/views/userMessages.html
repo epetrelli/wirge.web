@@ -1,1 +1,18 @@
-userMessages.html
+<h1>User Messages</h1>
+<table class="table">
+  <!--caption>Optional table caption.</caption-->
+  <thead>
+    <tr>
+      <th>From</th>
+      <th>e-mail</th>
+      <th>Date</th>
+    </tr>
+  </thead>
+  <tbody>
+  <tr ng-repeat="userMessage in userMessages" ng-click="goToUserMessage(userMessage.id)">
+    <td ng-bind="userMessage.nmFromName"></td>
+    <td ng-bind="userMessage.nmFromEMail"></td>
+    <td ng-bind="userMessage.dhCreated | date"></td>
+  </tr>
+  </tbody>
+</table>

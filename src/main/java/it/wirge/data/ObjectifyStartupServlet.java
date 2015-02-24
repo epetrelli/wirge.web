@@ -11,13 +11,12 @@ import java.io.IOException;
 import java.util.logging.Logger;
 
 /**
- * Created by enricopetrelli on 23/02/15.
+ * Registers classes for data storage
  */
 public class ObjectifyStartupServlet extends HttpServlet {
 
   private static final Logger logger = Logger.getLogger(ObjectifyStartupServlet.class.getName());
 
-  // Registers classes for data storage
   static {
     ObjectifyService.register(UserMessage.class);
     logger.info("ObjectifyService created");

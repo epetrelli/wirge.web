@@ -2,6 +2,7 @@ package it.wirge.rest.endpoints;
 
 import com.google.appengine.api.users.UserService;
 import com.google.appengine.api.users.UserServiceFactory;
+import com.google.appengine.repackaged.com.google.api.client.util.DateTime;
 import com.googlecode.objectify.Key;
 import it.wirge.data.model.UserMessage;
 import org.restlet.Response;
@@ -11,6 +12,7 @@ import org.restlet.resource.ServerResource;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
+import java.util.Date;
 import java.util.List;
 
 import static com.googlecode.objectify.ObjectifyService.ofy;
@@ -45,6 +47,7 @@ public class UserMessageEndpoint extends ServerResource {
   @Consumes({MediaType.APPLICATION_JSON})
   @Produces({MediaType.APPLICATION_JSON})
   public UserMessage create(UserMessage userMessage) {
+    userMessage.setDhCreated(new Date());
     ofy().save().entity(userMessage).now();
     return userMessage;
   }

@@ -7,6 +7,16 @@ import java.util.Set;
 
 import javax.ws.rs.core.Application;
 
+/**
+ *
+ * The restlet application.
+ * There can be more than one application:
+ * Applications are intantiated in RestletJaxRsApplication
+ * probably it's possible to enrich the
+ * app settings with more than a list of classes...
+ *
+ */
+
 public class RestletApplication extends Application {
 
 

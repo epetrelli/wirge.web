@@ -4,6 +4,10 @@ import com.googlecode.objectify.annotation.Entity;
 import com.googlecode.objectify.annotation.Id;
 import java.util.Date;
 
+/**
+ * UserMessage POJO
+ */
+
 @Entity
 public class UserMessage {
 
