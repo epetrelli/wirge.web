@@ -14,15 +14,19 @@ import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import java.util.Date;
 import java.util.List;
+import java.util.logging.Logger;
 
 import static com.googlecode.objectify.ObjectifyService.ofy;
 
 @Path("/usermessages")
 public class UserMessageEndpoint extends ServerResource {
 
+  private static final Logger logger = Logger.getLogger(UserMessageEndpoint.class.getName());
+
   @GET
   @Produces({MediaType.APPLICATION_JSON})
   public List<UserMessage> findAll() {
+    this.logger.info(Thread.currentThread().getStackTrace()[1].getMethodName() + "()");
     return ofy().load().type(UserMessage.class).list();
   }
 
@@ -30,7 +34,7 @@ public class UserMessageEndpoint extends ServerResource {
   @Path("{id}")
   @Produces({MediaType.APPLICATION_JSON})
   public UserMessage findById(@PathParam("id") Long id) {
-
+    this.logger.info(Thread.currentThread().getStackTrace()[1].getMethodName() + "(" + id + ")");
     // Admins only
     UserService userService = UserServiceFactory.getUserService();
     if(!userService.isUserLoggedIn() || !userService.isUserAdmin())
@@ -47,6 +51,7 @@ public class UserMessageEndpoint extends ServerResource {
   @Consumes({MediaType.APPLICATION_JSON})
   @Produces({MediaType.APPLICATION_JSON})
   public UserMessage create(UserMessage userMessage) {
+    this.logger.info(Thread.currentThread().getStackTrace()[1].getMethodName() + "()");
     userMessage.setDhCreated(new Date());
     ofy().save().entity(userMessage).now();
     return userMessage;
@@ -56,7 +61,7 @@ public class UserMessageEndpoint extends ServerResource {
   @Consumes({MediaType.APPLICATION_JSON})
   @Produces({MediaType.APPLICATION_JSON})
   public UserMessage update(UserMessage userMessage) {
-
+    this.logger.info(Thread.currentThread().getStackTrace()[1].getMethodName() + "()");
     // Admins only
     UserService userService = UserServiceFactory.getUserService();
     if(!userService.isUserLoggedIn() || !userService.isUserAdmin())
@@ -66,15 +71,16 @@ public class UserMessageEndpoint extends ServerResource {
   }
 
   @DELETE
-  @Consumes({MediaType.APPLICATION_JSON})
-  @Produces({MediaType.APPLICATION_JSON})
-  public void remove(UserMessage userMessage) {
+  @Path("{id}")
+  public void remove(@PathParam("id") Long id) {
+
+    this.logger.info(Thread.currentThread().getStackTrace()[1].getMethodName() + "(" + id + ")");
 
     // Admins only
     UserService userService = UserServiceFactory.getUserService();
     if(!userService.isUserLoggedIn() || !userService.isUserAdmin())
       throw new ResourceException(Status.CLIENT_ERROR_FORBIDDEN);
 
-    ofy().delete().entity(userMessage).now();
+    ofy().delete().key(Key.create(UserMessage.class, id)).now();
   }
 }

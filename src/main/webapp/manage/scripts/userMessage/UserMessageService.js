@@ -3,6 +3,7 @@
 WirgeManageApp.factory('UserMessageService', ['$resource', 'UrlsService',
   function ($resource, urlsService) {
     return $resource(urlsService.restUrl + '/usermessages', {}, {
+
       // all messages:
       'getMessages': { method: 'GET', withCredentials: true, isArray:true},
 
@@ -10,13 +11,13 @@ WirgeManageApp.factory('UserMessageService', ['$resource', 'UrlsService',
       'getMessage': { method: 'GET', url: urlsService.restUrl + '/usermessages/:id', withCredentials: true},
 
       // Create Message:
-      'createMessage': { method: 'POST', url: urlsService.restUrl + '/usermessages/', withCredentials: true},
+      'createMessage': { method: 'POST', withCredentials: true},
 
       // Save Message:
-      'saveMessage': { method: 'PUT', url: urlsService.restUrl + '/usermessages/', withCredentials: true},
+      'saveMessage': { method: 'PUT', withCredentials: true},
 
       // Delete Message:
-      'deleteMessage': { method: 'DELETE', url: urlsService.restUrl + '/usermessages/', withCredentials: true}
+      'deleteMessage': { method: 'DELETE', url: urlsService.restUrl + '/usermessages/:id', withCredentials: true}
     });
   }]);
 

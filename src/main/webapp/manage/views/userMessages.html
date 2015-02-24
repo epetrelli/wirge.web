@@ -1,5 +1,5 @@
 <h1>User Messages</h1>
-<table class="table">
+<table class="table table-hover table-bordered">
   <!--caption>Optional table caption.</caption-->
   <thead>
     <tr>
@@ -9,7 +9,7 @@
     </tr>
   </thead>
   <tbody>
-  <tr ng-repeat="userMessage in userMessages" ng-click="goToUserMessage(userMessage.id)">
+  <tr class="hand" ng-repeat="userMessage in userMessages" ng-click="viewMessage(userMessage.id);">
     <td ng-bind="userMessage.nmFromName"></td>
     <td ng-bind="userMessage.nmFromEMail"></td>
     <td ng-bind="userMessage.dhCreated | date"></td>
