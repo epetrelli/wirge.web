@@ -2,9 +2,9 @@
 
 WirgeWebApp.factory('UserMessageService', ['$resource', 'UrlsService',
   function ($resource, urlsService) {
-    return $resource(urlsService.restUrl + '/usermessages', {}, {
+    return $resource(urlsService.restUrl + '/userMessages', {}, {
       // Create Message:
-      'createMessage': { method: 'POST', url: urlsService.restUrl + '/usermessages/', withCredentials: true},
+      'createMessage': { method: 'POST', withCredentials: true}
     });
   }]);
 

@@ -37,21 +37,18 @@
             <li><a href="/">Home</a></li>
             <li><a href="chi-siamo.html">Chi siamo</a></li>
             <li><a href="portfolio.html">Portfolio</a></li>
-            <li class="active"><a href="contact.html">Contatti</a></li>
+            <li><a href="contattaci.html">Contattaci</a></li>
           </ul>
         </div>
 
 
     </nav>
-  </div>
-
-  <div class="container marketing">
 
     <div data-ng-controller="UserMessageController">
-      <h1>Scrivici</h1>
-      <p class="lead">Scrivici un messaggio, ti contatteremo al più presto:</p>
+      <h1>Contattaci</h1>
+      <p class="lead">Per ottenere le informazioni che desideri, inviaci una richiesta:</p>
 
-      <div class="panel panel-default" data-ng-show="userMessage.id == null">
+      <div class="panel panel-default">
         <div class="panel-body">
           <form class="form-horizontal" name="userMessageForm">
             <div class="form-group">
@@ -71,42 +68,75 @@
             <div class="form-group">
               <label class="col-sm-3 control-label" for="userMessage.txtMessage">Testo del messaggio</label>
               <div class="col-sm-6">
-                <textarea class="form-control" rows="5" id="userMessage.txtMessage"
-                          data-ng-model="userMessage.txtMessage" placeholder="Testo del messaggio"
-                          ng-required="true"></textarea>
+                <textarea
+                  class="form-control"
+                  rows="5"
+                  id="userMessage.txtMessage"
+                  data-ng-model="userMessage.txtMessage"
+                  placeholder="Testo del messaggio"
+                  ng-required="true"></textarea>
               </div>
               <div class="col-sm-3"></div>
             </div>
+
+
             <div class="form-group">
               <div class="col-sm-3"></div>
               <div class="col-sm-6">
-                <button class="btn btn-default pull-right" data-ng-disabled="!userMessageForm.$valid"
-                        data-ng-click="sendUserMessage()">Invia il messaggio
-                </button>
+                <span class="small text-muted hidden-xs">compila tutti i campi</span>
+                <button
+                  class="btn btn-default pull-right"
+                  data-ng-disabled="!userMessageForm.$valid"
+                  data-ng-click="sendUserMessage()">Invia il messaggio</button>
               </div>
               <div class="col-sm-3"></div>
             </div>
+
           </form>
 
         </div>
       </div>
 
-      <div data-ng-show="userMessage.id != null">
-        <div class="alert alert-info text-center">
-          <br>
-          <br>
-          <br>
-          Grazie, il messaggio è stato inviato e sarai contattato al più presto.
-          <br>
-          <br>
-          <br>
-          <br>
+      <div class="modal fade" id="userMessageConfirm" tabindex="-1" role="dialog" aria-labelledby="" aria-hidden="true" visible="userMessage.id != null">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+              <h4 class="modal-title" id="exampleModalLabel"><span class="glyphicon glyphicon-envelope"></span> Messaggio inviato</h4>
+            </div>
+            <div class="modal-body">
+              <br>
+              <br>
+              Grazie, il messaggio è stato inviato e sarai contattato al più presto.
+              <br>
+              <br>
+              <br>
+            </div>
+            <div class="modal-footer">
+              <div class="row">
+                <div class="col-xs-5">
+                  <a href="/" class="btn btn-default form-control">
+                    <span class="glyphicon glyphicon-backward"></span>
+                    <span class="hidden-xs">Torna in Home Page</span>
+                  </a>
+                </div>
+                <div class="col-xs-2"></div>
+                <div class="col-xs-5">
+                  <button type="button" class="btn btn-default form-control" data-dismiss="modal">
+                    <span class="glyphicon glyphicon-remove"></span>
+                    <span class="hidden-xs">Chiudi</span>
+                  </button>
+                </div>
+              </div>
+
+
+            </div>
+          </div>
         </div>
       </div>
-
     </div>
 
-    <h1>Contatti</h1>
+    <h1>Come raggiungerci</h1>
     <div class="row">
       <div class="col-sm-6">
         <div class="well">
@@ -128,10 +158,13 @@
       </div>
     </div>
 
-    <footer>
-      <p class="small">&copy; 2015 WIRGE &middot; PI 01351660996</p>
-    </footer>
+  </div>
 
+  <div class="container">
+    <footer class="footer">
+      <p class="pull-right"><a href="#">Inizio</a></p>
+      <p>&copy; 2015 WIRGE &middot; PI 01351660996</p>
+    </footer>
   </div>
 
   <!-- build:js(.) scripts/vendor.js -->

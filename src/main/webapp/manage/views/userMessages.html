@@ -9,10 +9,10 @@
     </tr>
   </thead>
   <tbody>
-  <tr class="hand" ng-repeat="userMessage in userMessages" ng-click="viewMessage(userMessage.id);">
-    <td ng-bind="userMessage.nmFromName"></td>
-    <td ng-bind="userMessage.nmFromEMail"></td>
-    <td ng-bind="userMessage.dhCreated | date"></td>
+  <tr class="hand" ng-repeat="userMessage in userMessages" >
+    <td ng-click="viewMessage(userMessage.id);" ng-bind="userMessage.nmFromName"></td>
+    <td><a href="mailto:{{userMessage.nmFromEMail}}" ng-bind="userMessage.nmFromEMail"></a></td>
+    <td ng-click="viewMessage(userMessage.id);" ng-bind="userMessage.dhCreated | date"></td>
   </tr>
   </tbody>
 </table>
