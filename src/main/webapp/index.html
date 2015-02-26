@@ -17,7 +17,7 @@
   <!-- endbuild -->
 </head>
 
-<body>
+<body ng-app="WirgeWebApp">
 
 <div class="container">
 
@@ -51,47 +51,58 @@
     <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
     <li data-target="#myCarousel" data-slide-to="1"></li>
     <li data-target="#myCarousel" data-slide-to="2"></li>
+    <li data-target="#myCarousel" data-slide-to="3"></li>
   </ol>
   <div class="carousel-inner" role="listbox">
     <div class="item active">
       <img src="images/something.jpg" alt="">
-
       <div class="container">
         <div class="carousel-caption">
-          <h1>Example headline.</h1>
-
-          <p>Note: If you're viewing this page via a <code>file://</code> URL, the "next" and "previous" Glyphicon
-            buttons on the left and right might not load/display properly due to web browser security rules.</p>
-
-          <p><a class="btn btn-lg btn-primary" href="#" role="button">Sign up today</a></p>
+          <h1>e-commerce</h1>
+          <p class="hidden-xs">
+            Le tue esigenze e le nostre tecnologie possono trasformare l'e-commerce in un'esperienza di acquisto completa,
+            <br>dalla ricerca del prodotto alla consegna a casa
+          </p>
+          <p><a class="btn btn-lg btn-primary" href="#" role="button">Guarda come <span class="glyphicon glyphicon-chevron-right"></span></a></p>
         </div>
       </div>
     </div>
     <div class="item">
       <img src="images/something.jpg" alt="">
-
       <div class="container">
         <div class="carousel-caption">
-          <h1>Another example headline.</h1>
-
-          <p>Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget
-            metus. Nullam id dolor id nibh ultricies vehicula ut id elit.</p>
-
-          <p><a class="btn btn-lg btn-primary" href="#" role="button">Learn more</a></p>
+          <h1>Integrazione</h1>
+          <p class="hidden-xs">
+            Quando niente è lasciato al caso, i risultati arrivano, e possono avere fattori di crescita elevati.
+            <br>Per questo è indispensabile prevedere e definire ogni processo, automatizzando efficacemente ogni passaggio
+          </p>
+          <p><a class="btn btn-lg btn-primary" href="#" role="button">Vedi come <span class="glyphicon glyphicon-chevron-right"></span></a></p>
         </div>
       </div>
     </div>
     <div class="item">
       <img src="images/something.jpg" alt="">
-
       <div class="container">
         <div class="carousel-caption">
-          <h1>One more for good measure.</h1>
-
-          <p>Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget
-            metus. Nullam id dolor id nibh ultricies vehicula ut id elit.</p>
-
-          <p><a class="btn btn-lg btn-primary" href="#" role="button">Browse gallery</a></p>
+          <h1>Gestione</h1>
+          <p class="hidden-xs">
+            Una piattaforma di commercio elettronico è un oggetto complesso: costruirlo richiede competenze ampie ed approfondite.
+            <br>La nostra ricetta richiede che Creatività ed esperienza siano applicate ad ogni singolo dettaglio.
+          </p>
+          <p><a class="btn btn-lg btn-primary" href="#" role="button">Scopri come <span class="glyphicon glyphicon-chevron-right"></span></a></p>
+        </div>
+      </div>
+    </div>
+    <div class="item">
+      <img src="images/something.jpg" alt="">
+      <div class="container">
+        <div class="carousel-caption">
+          <h1>Evoluzione</h1>
+          <p class="hidden-xs">
+            Il Mercato, i Clienti e il Business sono in continua evoluzione, e le tecnologie devono seguire e possibilmente anticipare questo trend.
+            <br>Evoluzione è cercare continuamente soluzione migliore per aumentare l'efficacia di tutto il sistema di e-commerce.
+          </p>
+          <p><a class="btn btn-lg btn-primary" href="#" role="button">Ecco come <span class="glyphicon glyphicon-chevron-right"></span></a></p>
         </div>
       </div>
     </div>
@@ -142,7 +153,7 @@
       <div class="col-lg-6 text-center">
         <img class="img-circle" src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" alt="Evoluzione" style="width: 140px; height: 140px;">
         <h2>Evoluzione</h2>
-        <p>Seguiamo i nostri progetti tenendoli sempre aggiornati all'evoluzione della rete, alle esigenze del mercato e dei clienti.</p>
+        <p>Seguiamo i nostri progetti tenendoli sempre aggiornati all'evoluzione della rete, alle esigenze del Mercato e dei Clienti.</p>
         <p><a class="btn btn-default" href="#" role="button">Dettagli <span class="glyphicon glyphicon-chevron-right"></span></a></p>
       </div>
     </div>
@@ -208,11 +219,93 @@
     </div>
   </div>
 
+  <hr>
+
+  <div class="well">
+    <h2>Contattaci</h2>
+    <p class="lead">Se ti piace il nostro modo di vivere il web e l'e-commerce, e vuoi approfondire qualche argomento, invia un messaggio, ti contatteremo al più presto:</p>
+    <div data-ng-controller="UserMessageController">
+
+      <form class="form-horizontal" name="userMessageForm">
+        <div class="form-group">
+          <label class="col-sm-3 control-label" for="userMessage.nmFromName">Nome</label>
+          <div class="col-sm-6">
+            <input type="text" class="form-control" id="userMessage.nmFromName" ng-model="userMessage.nmFromName" placeholder="Nome" ng-required="true">
+          </div>
+          <div class="col-sm-3"></div>
+        </div>
+        <div class="form-group">
+          <label class="col-sm-3 control-label" for="userMessage.nmFromEMail">Indirizzo e-mail</label>
+          <div class="col-sm-6">
+            <input type="email" class="form-control" id="userMessage.nmFromEMail" ng-model="userMessage.nmFromEMail" placeholder="Indirizzo e-mail" ng-required="true">
+          </div>
+          <div class="col-sm-3"></div>
+        </div>
+        <div class="form-group">
+          <label class="col-sm-3 control-label" for="userMessage.txtMessage">Testo del messaggio</label>
+          <div class="col-sm-6">
+            <textarea
+              class="form-control"
+              rows="5"
+              id="userMessage.txtMessage"
+              data-ng-model="userMessage.txtMessage"
+              placeholder="Testo del messaggio"
+              ng-required="true"></textarea>
+          </div>
+          <div class="col-sm-3"></div>
+        </div>
+
+
+        <div class="form-group">
+          <div class="col-sm-3"></div>
+          <div class="col-sm-6">
+            <span class="small text-muted hidden-xs">compila tutti i campi</span>
+            <button
+              class="btn btn-default pull-right"
+              data-ng-disabled="!userMessageForm.$valid"
+              data-ng-click="sendUserMessage()">Invia il messaggio</button>
+          </div>
+          <div class="col-sm-3"></div>
+        </div>
+
+      </form>
+
+      <div class="modal fade" id="userMessageConfirm" tabindex="-1" role="dialog" aria-labelledby="" aria-hidden="true" visible="userMessage.id != null">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+              <h4 class="modal-title" id="exampleModalLabel"><span class="glyphicon glyphicon-envelope"></span> Messaggio inviato</h4>
+            </div>
+            <div class="modal-body text-center">
+              <br>
+              <br>
+              Grazie, il messaggio è stato inviato e sarai contattato al più presto.
+              <br>
+              <br>
+              <br>
+            </div>
+            <div class="modal-footer">
+              <div class="row">
+                <div class="col-xs-5">
+                  <a href="/" class="btn btn-default form-control"><span class="glyphicon glyphicon-backward"></span><span class="hidden-xs">Torna in Home Page</span></a>
+                </div>
+                <div class="col-xs-2"></div>
+                <div class="col-xs-5">
+                  <button type="button" class="btn btn-default form-control" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span><span class="hidden-xs">Chiudi</span></button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
 </div>
 
 <div class="container">
   <footer class="footer">
-    <p class="pull-right"><a href="#">Inizio</a></p>
     <p>&copy; 2015 WIRGE &middot; PI 01351660996</p>
   </footer>
 </div>
@@ -235,6 +328,9 @@
 
 <!-- build:js scripts/scripts.js -->
 <script src="scripts/WirgeWebApp.js"></script>
+<script src="scripts/UrlsService.js"></script>
+<script src="scripts/userMessage/UserMessageService.js"></script>
+<script src="scripts/userMessage/UserMessageController.js"></script>
 <!-- endbuild -->
 </body>
 </html>
