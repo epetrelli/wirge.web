@@ -135,6 +135,25 @@
       </plugin>
 
       <plugin>
+        <groupId>com.github.trecloux</groupId>
+        <artifactId>yeoman-maven-plugin</artifactId>
+        <version>0.1</version>
+        <configuration>
+          <yeomanProjectDirectory>${project.basedir}</yeomanProjectDirectory>
+        </configuration>
+        <executions>
+          <execution>
+            <id>run-grunt</id>
+            <phase>generate-resources</phase>
+            <goals>
+              <goal>build</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+
+
+      <plugin>
         <groupId>com.google.appengine</groupId>
         <artifactId>appengine-maven-plugin</artifactId>
         <version>1.9.17a</version>
