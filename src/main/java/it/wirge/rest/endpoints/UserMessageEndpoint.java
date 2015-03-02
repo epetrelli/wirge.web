@@ -38,6 +38,9 @@ public class UserMessageEndpoint extends ServerResource {
     if (!userService.isUserLoggedIn() || !userService.isUserAdmin())
       throw new ResourceException(Status.CLIENT_ERROR_FORBIDDEN);
 
+    logger.info("isUserLoggedIn: " + userService.isUserLoggedIn());
+    logger.info(userService.getCurrentUser().getNickname());
+
     UserMessage userMessage = ofy().load().key(Key.create(UserMessage.class, id)).now();
     if (userMessage == null) {
       throw new ResourceException(Status.CLIENT_ERROR_NOT_FOUND);

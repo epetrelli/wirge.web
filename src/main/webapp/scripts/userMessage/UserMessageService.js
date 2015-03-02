@@ -1,6 +1,6 @@
 'use strict';
 
-WirgeWebApp.factory('UserMessageService', ['$resource', 'UrlsService',
+WirgeApp.factory('UserMessageService', ['$resource', 'UrlsService',
   function ($resource, urlsService) {
     return $resource(urlsService.restUrl + '/userMessages', {}, {
       // Create Message:

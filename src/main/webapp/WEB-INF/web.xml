@@ -50,7 +50,7 @@
   <security-constraint>
     <web-resource-collection>
       <web-resource-name>manage</web-resource-name>
-      <url-pattern>/manage/*</url-pattern>
+      <url-pattern>/manage.html</url-pattern>
     </web-resource-collection>
     <auth-constraint>
       <role-name>admin</role-name>

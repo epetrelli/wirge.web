@@ -17,7 +17,7 @@ module.exports = function (grunt) {
 
   // Configurable paths for the application
   var appConfig = {
-    app: require('./bower.json').appPath || 'web',
+    app: require('./bower.json').appPath,
     dist: 'dist'
   };
 
@@ -33,34 +33,36 @@ module.exports = function (grunt) {
         files: ['bower.json'],
         tasks: ['wiredep']
       },
-      js: {
-        files: ['<%= yeoman.app %>/scripts/{,*/}*.js'],
-        tasks: ['newer:jshint:all'],
-        options: {
-          livereload: '<%= connect.options.livereload %>'
-        }
-      },
-      jsTest: {
-        files: ['test/spec/{,*/}*.js'],
-        tasks: ['newer:jshint:test', 'karma']
-      },
+
+//      js: {
+//        files: ['<%= yeoman.app %>/scripts/{,*/}*.js'],
+//        tasks: ['newer:jshint:all'],
+//        options: {
+//          livereload: '<%= connect.options.livereload %>'
+//        }
+//      },
+//      jsTest: {
+//        files: ['test/spec/{,*/}*.js'],
+//        tasks: ['newer:jshint:test', 'karma']
+//      },
+
       styles: {
         files: ['<%= yeoman.app %>/styles/{,*/}*.css'],
         tasks: ['newer:copy:styles', 'autoprefixer']
       },
       gruntfile: {
         files: ['Gruntfile.js']
-      },
-      livereload: {
-        options: {
-          livereload: '<%= connect.options.livereload %>'
-        },
-        files: [
-          '<%= yeoman.app %>/{,*/}*.html',
-          '.tmp/styles/{,*/}*.css',
-          '<%= yeoman.app %>/images/{,*/}*.{png,jpg,jpeg,gif,webp,svg}'
-        ]
       }
+//      livereload: {
+//        options: {
+//          livereload: '<%= connect.options.livereload %>'
+//        },
+//        files: [
+//          '<%= yeoman.app %>/{,*/}*.html',
+//          '.tmp/styles/{,*/}*.css',
+//          '<%= yeoman.app %>/images/{,*/}*.{png,jpg,jpeg,gif,webp,svg}'
+//        ]
+//      }
     },
 
     // The actual grunt server settings
@@ -119,7 +121,7 @@ module.exports = function (grunt) {
       all: {
         src: [
           'Gruntfile.js',
-          '<%= yeoman.app %>/scripts/{,*/}*.js'
+          //'<%= yeoman.app %>/scripts/{,*/}*.js'
         ]
       },
       test: {
@@ -162,22 +164,14 @@ module.exports = function (grunt) {
 
     // Automatically inject Bower components into the app
     wiredep: {
-      app: {
-        src: [
-          '<%= yeoman.app %>/*.html'
-        ],
+      all : {
+        src: ['<%= yeoman.app %>/*.html'],
         ignorePath:  /\.\.\//
-      },
-      manage: {
-        src: [
-          '<%= yeoman.app %>/manage/*.html'
-        ],
-        ignorePath:  /^(\/|\.+(?!\/[^\.]))+\.+/
       }
     },
 
     // Renames files for browser caching purposes
-    filerev: {
+    filerev : {
       dist: {
         src: [
           '<%= yeoman.dist %>/scripts/{,*/}*.js',
@@ -314,8 +308,6 @@ module.exports = function (grunt) {
             '*.{ico,png,txt}',
             '*.html',
             'views/{,*/}*.html',
-            'manage/*.html',
-            'manage/views/{,*/}*.html',
             'images/{,*/}*.{webp}',
             'fonts/{,*/}*.*'
           ]
@@ -385,18 +377,25 @@ module.exports = function (grunt) {
   });
 
   grunt.registerTask('test', [
+    /*
     'clean:server',
     'concurrent:test',
     'autoprefixer',
     'connect:test',
     'karma'
+    */
   ]);
 
   grunt.registerTask('build', [
     'clean:dist',
     'wiredep',
     'useminPrepare',
-    'concurrent:dist',
+    //'concurrent:dist',
+
+    'copy:styles',
+    'imagemin',
+    'svgmin',
+
     'autoprefixer',
     'concat',
     'ngAnnotate',
