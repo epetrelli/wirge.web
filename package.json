@@ -1,5 +1,9 @@
 {
   "name": "wirge.it",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/epetrelli/wirge.web.git"
+  },
   "version": "4.0.0",
   "dependencies": {},
   "devDependencies": {

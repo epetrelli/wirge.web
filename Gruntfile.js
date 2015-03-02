@@ -164,28 +164,17 @@ module.exports = function (grunt) {
     wiredep: {
       app: {
         src: [
-          '<%= yeoman.app %>/*.html',
-          '<%= yeoman.app %>/manage/*.html'
+          '<%= yeoman.app %>/*.html'
         ],
         ignorePath:  /\.\.\//
-      }
-    },
-
-    //moves bower dependencies styles to styles folder
-    bowercopy: {
-      options: {
-        srcPrefix: 'web/bower_components'
       },
-      styles: {
-        options: {
-          destPrefix: 'web/styles'
-        },
-        files: {
-          'vendor/bootstrap.css': 'bootstrap/dist/css/bootstrap.css'
-        }
+      manage: {
+        src: [
+          '<%= yeoman.app %>/manage/*.html'
+        ],
+        ignorePath:  /^(\/|\.+(?!\/[^\.]))+\.+/
       }
     },
-
 
     // Renames files for browser caching purposes
     filerev: {
@@ -325,6 +314,8 @@ module.exports = function (grunt) {
             '*.{ico,png,txt}',
             '*.html',
             'views/{,*/}*.html',
+            'manage/*.html',
+            'manage/views/{,*/}*.html',
             'images/{,*/}*.{webp}',
             'fonts/{,*/}*.*'
           ]
@@ -341,10 +332,10 @@ module.exports = function (grunt) {
         }]
       },
       styles: {
-        expand: true,
-        cwd: '<%= yeoman.app %>/styles',
-        dest: '.tmp/styles/',
-        src: '{,*/}*.css'
+          expand: true,
+          cwd: '<%= yeoman.app %>/styles',
+          dest: '.tmp/styles/',
+          src: '{,*/}*.css'
       }
     },
 
@@ -410,7 +401,7 @@ module.exports = function (grunt) {
     'concat',
     'ngAnnotate',
     'copy:dist',
-    'cdnify',
+    //'cdnify',
     'cssmin',
     'uglify',
     'filerev',
