@@ -90,8 +90,36 @@
   <build>
     <!-- for hot reload of the web application-->
     <outputDirectory>${project.build.directory}/${project.build.finalName}/WEB-INF/classes</outputDirectory>
+    <resources>
+      <resource>
+        <directory>src/main/resources</directory>
+        <filtering>true</filtering>
+        <includes>
+          <include>**/*</include>
+        </includes>
+      </resource>
+    </resources>
+
 
     <plugins>
+
+      <!-- Maven Clean -->
+      <plugin>
+        <artifactId>maven-clean-plugin</artifactId>
+        <version>2.5</version>
+        <configuration>
+          <filesets>
+            <fileset>
+              <directory>dist</directory>
+            </fileset>
+            <fileset>
+              <directory>.tmp</directory>
+            </fileset>
+          </filesets>
+        </configuration>
+      </plugin>
+
+      <!-- Maven versions -->
       <plugin>
         <groupId>org.codehaus.mojo</groupId>
         <artifactId>versions-maven-plugin</artifactId>
@@ -107,6 +135,7 @@
         </executions>
       </plugin>
 
+      <!-- Maven Compiler -->
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <version>3.2</version>
@@ -117,12 +146,17 @@
         </configuration>
       </plugin>
 
+      <!-- Maven War -->
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-war-plugin</artifactId>
         <version>2.6</version>
         <configuration>
           <archiveClasses>true</archiveClasses>
+          <warSourceExcludes>**/*</warSourceExcludes>
+
+
+
           <webResources>
             <!-- in order to interpolate version from pom into appengine-web.xml -->
             <resource>
@@ -130,10 +164,23 @@
               <filtering>true</filtering>
               <targetPath>WEB-INF</targetPath>
             </resource>
+
+            <resource>
+              <directory>${basedir}/dist</directory>
+            </resource>
+
+            <resource>
+              <directory>${basedir}/src/main/webapp</directory>
+              <filtering>true</filtering>
+              <include>wirge_mail.gif</include>
+              <targetPath>/</targetPath>
+            </resource>
+
           </webResources>
         </configuration>
       </plugin>
 
+      <!-- Trecolux (Grunt & Co.) -->
       <plugin>
         <groupId>com.github.trecloux</groupId>
         <artifactId>yeoman-maven-plugin</artifactId>
@@ -152,7 +199,7 @@
         </executions>
       </plugin>
 
-
+      <!-- appengine -->
       <plugin>
         <groupId>com.google.appengine</groupId>
         <artifactId>appengine-maven-plugin</artifactId>

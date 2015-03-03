@@ -4,6 +4,7 @@ import com.google.appengine.api.users.UserService;
 import com.google.appengine.api.users.UserServiceFactory;
 import com.googlecode.objectify.Key;
 import it.wirge.data.model.UserMessage;
+import it.wirge.rest.WirgeEndPoint;
 import org.restlet.data.Status;
 import org.restlet.resource.ResourceException;
 import org.restlet.resource.ServerResource;
@@ -17,7 +18,7 @@ import java.util.logging.Logger;
 import static com.googlecode.objectify.ObjectifyService.ofy;
 
 @Path("/userMessages")
-public class UserMessageEndpoint extends ServerResource {
+public class UserMessageEndpoint extends WirgeEndPoint {
 
   private static final Logger logger = Logger.getLogger(UserMessageEndpoint.class.getName());
 
@@ -25,6 +26,8 @@ public class UserMessageEndpoint extends ServerResource {
   @Produces({MediaType.APPLICATION_JSON})
   public List<UserMessage> findAll() {
     logger.info(Thread.currentThread().getStackTrace()[1].getMethodName() + "()");
+    // Admins only
+    verifyUserIsAdmin();
     return ofy().load().type(UserMessage.class).list();
   }
 
@@ -33,13 +36,9 @@ public class UserMessageEndpoint extends ServerResource {
   @Produces({MediaType.APPLICATION_JSON})
   public UserMessage findById(@PathParam("id") Long id) {
     logger.info(Thread.currentThread().getStackTrace()[1].getMethodName() + "(" + id + ")");
-    // Admins only
-    UserService userService = UserServiceFactory.getUserService();
-    if (!userService.isUserLoggedIn() || !userService.isUserAdmin())
-      throw new ResourceException(Status.CLIENT_ERROR_FORBIDDEN);
 
-    logger.info("isUserLoggedIn: " + userService.isUserLoggedIn());
-    logger.info(userService.getCurrentUser().getNickname());
+    // Admins only
+    verifyUserIsAdmin();
 
     UserMessage userMessage = ofy().load().key(Key.create(UserMessage.class, id)).now();
     if (userMessage == null) {
@@ -64,24 +63,16 @@ public class UserMessageEndpoint extends ServerResource {
   public UserMessage update(UserMessage userMessage) {
     logger.info(Thread.currentThread().getStackTrace()[1].getMethodName() + "()");
     // Admins only
-    UserService userService = UserServiceFactory.getUserService();
-    if (!userService.isUserLoggedIn() || !userService.isUserAdmin())
-      throw new ResourceException(Status.CLIENT_ERROR_FORBIDDEN);
-
+    verifyUserIsAdmin();
     return create(userMessage);
   }
 
   @DELETE
   @Path("{id}")
   public void remove(@PathParam("id") Long id) {
-
     logger.info(Thread.currentThread().getStackTrace()[1].getMethodName() + "(" + id + ")");
-
     // Admins only
-    UserService userService = UserServiceFactory.getUserService();
-    if (!userService.isUserLoggedIn() || !userService.isUserAdmin())
-      throw new ResourceException(Status.CLIENT_ERROR_FORBIDDEN);
-
+    verifyUserIsAdmin();
     ofy().delete().key(Key.create(UserMessage.class, id)).now();
   }
 }

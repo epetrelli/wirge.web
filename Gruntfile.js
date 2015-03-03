@@ -170,6 +170,19 @@ module.exports = function (grunt) {
       }
     },
 
+    less: {
+      production: {
+        options: {
+          cleancss: true,
+          compress: false,
+          relativeUrls: true
+        },
+        files: {
+          'src/main/webapp/styles/wirge-bootstrap.css': 'src/main/webapp/bower_components/bootstrap/less/bootstrap.less'
+        }
+      }
+    },
+
     // Renames files for browser caching purposes
     filerev : {
       dist: {
@@ -389,6 +402,7 @@ module.exports = function (grunt) {
   grunt.registerTask('build', [
     'clean:dist',
     'wiredep',
+    'less',
     'useminPrepare',
     //'concurrent:dist',
 

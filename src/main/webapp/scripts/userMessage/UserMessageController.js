@@ -2,7 +2,7 @@
 
 /**
  * @ngdoc function
- * @name WirgeWebApp.controller:UserMessageController
+ * @name WirgeApp.controller:UserMessageController
  * @description
  * # UserMessageController
  * Controller to send messages to the app
