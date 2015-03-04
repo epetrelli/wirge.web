@@ -20,8 +20,6 @@ import static com.googlecode.objectify.ObjectifyService.ofy;
 @Path("/userMessages")
 public class UserMessageEndpoint extends WirgeEndPoint {
 
-  private static final Logger logger = Logger.getLogger(UserMessageEndpoint.class.getName());
-
   @GET
   @Produces({MediaType.APPLICATION_JSON})
   public List<UserMessage> findAll() {

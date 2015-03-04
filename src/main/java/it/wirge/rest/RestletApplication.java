@@ -1,5 +1,6 @@
 package it.wirge.rest;
 
+import it.wirge.rest.endpoints.BlogPostEndpoint;
 import it.wirge.rest.endpoints.UserMessageEndpoint;
 
 import java.util.HashSet;
@@ -26,6 +27,7 @@ public class RestletApplication extends Application {
     Set<Class<?>> resourceClasses = new HashSet<Class<?>>();
 
     resourceClasses.add(UserMessageEndpoint.class);
+    resourceClasses.add(BlogPostEndpoint.class);
 
     return resourceClasses;
   }

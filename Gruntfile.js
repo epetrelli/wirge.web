@@ -254,7 +254,7 @@ module.exports = function (grunt) {
         files: [{
           expand: true,
           cwd: '<%= yeoman.app %>/images/',
-          src: '*.xxx',
+          src: '*.*',
           dest: '<%= yeoman.dist %>/images'
         }]
 
