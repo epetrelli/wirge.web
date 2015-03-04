@@ -29,7 +29,7 @@ WirgeApp.controller('UserMessageController', ['$scope', 'UserMessageService',
       // Map setup:
       // create a map in the 'map' div, set the view to a given place and zoom
       var map = L.map('map').setView([45.43, 9.18], 14);
-      L.Icon.Default.imagePath = '/';
+      L.Icon.Default.imagePath = '/images';
       // add an OpenStreetMap tile layer
       L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
         attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'

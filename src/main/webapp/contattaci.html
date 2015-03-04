@@ -11,6 +11,7 @@
   <!-- endbower -->
   <!-- endbuild -->
   <!-- build:css(.tmp) styles/main.css -->
+  <link rel="stylesheet" href="styles/wirge-bootstrap.css">
   <link rel="stylesheet" href="styles/main.css">
   <!-- endbuild -->
 </head>
@@ -84,7 +85,7 @@
               <div class="col-sm-6">
                 <span class="small text-muted hidden-xs">compila tutti i campi</span>
                 <button
-                  class="btn btn-default pull-right"
+                  class="btn btn-primary pull-right"
                   data-ng-disabled="!userMessageForm.$valid"
                   data-ng-click="sendUserMessage()"><span class="glyphicon glyphicon-send"></span> Invia il messaggio</button>
               </div>
@@ -96,7 +97,7 @@
         </div>
       </div>
 
-      <div class="modal fade" id="userMessageConfirm" tabindex="-1" role="dialog" aria-labelledby="" aria-hidden="true" visible="userMessage.id != null">
+      <div class="modal fade" id="userMessageConfirm" tabindex="-1" role="dialog" aria-labelledby="" aria-hidden="true" data-visible="userMessage.id != null">
         <div class="modal-dialog">
           <div class="modal-content">
             <div class="modal-header">
@@ -165,7 +166,7 @@
     </footer>
   </div>
 
-  <!-- build:js(.) scripts/vendor.js -->
+  <!-- build:js scripts/vendor.js -->
   <!-- bower:js -->
   <script src="bower_components/es5-shim/es5-shim.js"></script>
   <script src="bower_components/angular/angular.js"></script>
@@ -183,6 +184,8 @@
   <!-- endbuild -->
 
   <!-- build:js scripts/scripts.js -->
+  <script src="bower_components/jquery/dist/jquery.js"></script>
+  <script src="bower_components/bootstrap/dist/js/bootstrap.js"></script>
   <script src="scripts/WirgeApp.js"></script>
   <script src="scripts/WirgeUrlsService.js"></script>
   <script src="scripts/userMessage/UserMessageService.js"></script>
