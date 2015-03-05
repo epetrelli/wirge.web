@@ -48,6 +48,7 @@ public class BlogPostEndpoint extends WirgeEndPoint {
   public BlogPost create(BlogPost blogPost) {
     logger.info(Thread.currentThread().getStackTrace()[1].getMethodName() + "()");
     blogPost.setDhCreated(new Date());
+    blogPost.setPublished(false);
     ofy().save().entity(blogPost).now();
     return blogPost;
   }

@@ -1,6 +1,7 @@
 package it.wirge.data.model;
 
 import com.googlecode.objectify.annotation.Entity;
+import com.googlecode.objectify.annotation.Id;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -12,6 +13,7 @@ import java.util.Date;
 @Entity
 public class BlogPost {
 
+  @Id
   private Long idBlogPost;
   private String nmTitle;
   private String nmSubtitle;
