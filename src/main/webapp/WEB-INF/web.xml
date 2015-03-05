@@ -51,10 +51,18 @@
       <param-value>it.wirge.rest.RestletJaxRsApplication</param-value>
     </init-param>
   </servlet>
-
   <servlet-mapping>
     <servlet-name>RestletServlet</servlet-name>
     <url-pattern>/rest/*</url-pattern>
+  </servlet-mapping>
+
+  <servlet>
+    <servlet-name>TemplateServlet</servlet-name>
+    <servlet-class>it.wirge.web.TemplateServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>TemplateServlet</servlet-name>
+    <url-pattern>/blog/*</url-pattern>
   </servlet-mapping>
 
   <security-constraint>
