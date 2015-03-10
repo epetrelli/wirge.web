@@ -113,7 +113,7 @@
       <!-- Maven Clean -->
       <plugin>
         <artifactId>maven-clean-plugin</artifactId>
-        <version>2.5</version>
+        <version>2.6.1</version>
         <configuration>
           <filesets>
             <fileset>
@@ -191,7 +191,7 @@
       <plugin>
         <groupId>com.github.trecloux</groupId>
         <artifactId>yeoman-maven-plugin</artifactId>
-        <version>0.1</version>
+        <version>0.4</version>
         <configuration>
           <yeomanProjectDirectory>${project.basedir}</yeomanProjectDirectory>
         </configuration>
