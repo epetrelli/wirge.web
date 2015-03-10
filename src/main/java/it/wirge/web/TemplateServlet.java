@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.Writer;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.logging.Logger;
 
@@ -32,13 +33,23 @@ public class TemplateServlet extends HttpServlet {
     cfg.setServletContextForTemplateLoading(getServletContext(), "templates");
   }
 
-  protected void doGet(HttpServletRequest req, HttpServletResponse resp)
+  protected void doGet(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse)
     throws ServletException, IOException {
 
     // based on request, here is found the right blogPost
     // which is the data-model
-    // TODO
-    BlogPost blogPost = ofy().load().key(Key.create(BlogPost.class, 4785074604081152l)).now();
+
+    String sCompletePath = httpServletRequest.getRequestURI();
+    String[] saCompletePath = sCompletePath.split("\\/");
+    String sLastToken = saCompletePath[saCompletePath.length-1];
+    BlogPost blogPost = ofy().load().type(BlogPost.class).filter("ulLink", sLastToken).first().now();
+
+    if(blogPost == null || !blogPost.getPublished()) {
+      logger.info("Not found");
+      httpServletResponse.sendError(HttpServletResponse.SC_NOT_FOUND);
+      return;
+    }
+
     logger.info(blogPost.getNmTitle());
 
     // Get the templat object
@@ -47,8 +58,8 @@ public class TemplateServlet extends HttpServlet {
     // Prepare the HTTP response:
     // - Use the charset of template for the output
     // - Use text/html MIME-type
-    resp.setContentType("text/html; charset=" + t.getEncoding());
-    Writer out = resp.getWriter();
+    httpServletResponse.setContentType("text/html; charset=" + t.getEncoding());
+    Writer out = httpServletResponse.getWriter();
 
     // Merge the data-model and the template
     try {

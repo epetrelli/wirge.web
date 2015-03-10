@@ -2,6 +2,8 @@ package it.wirge.rest.endpoints;
 
 
 import com.googlecode.objectify.Key;
+import it.wirge.Constants;
+import it.wirge.Utils;
 import it.wirge.data.model.BlogPost;
 import it.wirge.rest.WirgeEndPoint;
 import org.restlet.data.Status;
@@ -47,10 +49,14 @@ public class BlogPostEndpoint extends WirgeEndPoint {
   @Produces({MediaType.APPLICATION_JSON})
   public BlogPost create(BlogPost blogPost) {
     logger.info(Thread.currentThread().getStackTrace()[1].getMethodName() + "()");
+
     if(blogPost.getIdBlogPost()==null) {
       blogPost.setDhCreated(new Date());
       blogPost.setPublished(false);
     }
+
+    blogPost.setUlLink(Utils.toPrettyURL(blogPost.getNmTitle(), Constants.EXTENSION_HTML));
+
     ofy().save().entity(blogPost).now();
     return blogPost;
   }

@@ -2,6 +2,7 @@ package it.wirge.rest;
 
 import com.google.appengine.api.users.UserService;
 import com.google.appengine.api.users.UserServiceFactory;
+import it.wirge.Constants;
 import org.restlet.data.Status;
 import org.restlet.resource.ResourceException;
 import org.restlet.resource.ServerResource;
@@ -18,7 +19,7 @@ public class WirgeEndPoint extends ServerResource {
   public void verifyUserIsAdmin(){
     UserService userService = UserServiceFactory.getUserService();
     if (!userService.isUserLoggedIn() || !userService.isUserAdmin())
-      throw new ResourceException(Status.CLIENT_ERROR_FORBIDDEN);
+      throw new ResourceException(Status.CLIENT_ERROR_FORBIDDEN, Constants.ERROR_UNAUTHORIZED);
   }
 
 }

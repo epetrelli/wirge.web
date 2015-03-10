@@ -14,6 +14,7 @@ public class StoredImage {
   private Long idStoredImage;
   private String baBytes;
   private String nmAlternate;
+  private String nmFile;
   private Integer iOriginalW;
   private Integer iOriginalH;
 
@@ -39,6 +40,14 @@ public class StoredImage {
 
   public void setNmAlternate(String nmAlternate) {
     this.nmAlternate = nmAlternate;
+  }
+
+  public String getNmFile() {
+    return nmFile;
+  }
+
+  public void setNmFile(String nmFile) {
+    this.nmFile = nmFile;
   }
 
   public Integer getiOriginalW() {

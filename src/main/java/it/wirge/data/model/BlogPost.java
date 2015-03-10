@@ -1,9 +1,10 @@
 package it.wirge.data.model;
 
+import com.google.appengine.api.datastore.Text;
 import com.googlecode.objectify.annotation.Entity;
 import com.googlecode.objectify.annotation.Id;
+import com.googlecode.objectify.annotation.Index;
 
-import java.util.ArrayList;
 import java.util.Date;
 
 /**
@@ -15,11 +16,13 @@ public class BlogPost {
 
   @Id
   private Long idBlogPost;
+  @Index
+  private String ulLink;
+
   private String nmTitle;
   private String nmSubtitle;
   private String nmDescription;
-  private String txText;
-  private ArrayList<StoredImage> storedImages;
+  private Text txText;
   private Date dhCreated;
   private String nmAuthor;
   private Boolean published;
@@ -30,6 +33,14 @@ public class BlogPost {
 
   public void setIdBlogPost(Long idBlogPost) {
     this.idBlogPost = idBlogPost;
+  }
+
+  public String getUlLink() {
+    return ulLink;
+  }
+
+  public void setUlLink(String ulLink) {
+    this.ulLink = ulLink;
   }
 
   public String getNmTitle() {
@@ -56,20 +67,12 @@ public class BlogPost {
     this.nmDescription = nmDescription;
   }
 
-  public String getTxText() {
+  public Text getTxText() {
     return txText;
   }
 
-  public void setTxText(String txText) {
+  public void setTxText(Text txText) {
     this.txText = txText;
-  }
-
-  public ArrayList<StoredImage> getStoredImages() {
-    return storedImages;
-  }
-
-  public void setStoredImages(ArrayList<StoredImage> storedImages) {
-    this.storedImages = storedImages;
   }
 
   public Date getDhCreated() {
