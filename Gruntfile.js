@@ -166,7 +166,7 @@ module.exports = function (grunt) {
     wiredep: {
       all : {
         src: ['<%= yeoman.app %>/*.html','<%= yeoman.app %>/templates/*.ftl'],
-        ignorePath:  /\.\.\//
+        ignorePath: /^(\/|\.+(?!\/[^\.]))+\.+/
       }
     },
 
@@ -216,7 +216,7 @@ module.exports = function (grunt) {
 
     // Performs rewrites based on filerev and the useminPrepare configuration
     usemin: {
-      html: ['<%= yeoman.dist %>/{,*/}*.html'],
+      html: ['<%= yeoman.dist %>/{,*/}*.html','<%= yeoman.dist %>/{,*/}*.ftl'],
       css: ['<%= yeoman.dist %>/styles/{,*/}*.css'],
       options: {
         assetsDirs: ['<%= yeoman.dist %>','<%= yeoman.dist %>/images']
@@ -329,6 +329,7 @@ module.exports = function (grunt) {
             '*.{ico,png,txt}',
             '*.html',
             'views/{,*/}*.html',
+            'templates/{,*/}*.ftl',
             'images/{,*/}*.{webp}',
             'fonts/{,*/}*.*'
           ]
@@ -412,7 +413,7 @@ module.exports = function (grunt) {
     'wiredep',
     'less',
     'useminPrepare',
-    //'concurrent:dist',
+    'concurrent:dist',
 
     'copy:styles',
     'imagemin',

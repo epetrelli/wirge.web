@@ -5,13 +5,13 @@
   <title>${nmTitle}</title>
   <meta name="description" content="${nmDescription}">
   <meta name="viewport" content="width=device-width">
-  <!-- build:css(.tmp) styles/vendor.css -->
+  <!-- build:css(.tmp) /styles/vendor.css -->
   <!-- bower:css -->
-  <link rel="stylesheet" href="bower_components/leaflet/dist/leaflet.css" />
+  <link rel="stylesheet" href="/bower_components/leaflet/dist/leaflet.css" />
   <!-- endbower -->
   <!-- endbuild -->
 
-  <!-- build:css(.tmp) styles/main.css -->
+  <!-- build:css(.tmp) /styles/main.css -->
   <link rel="stylesheet" href="/styles/wirge-bootstrap.css">
   <link rel="stylesheet" href="/styles/main.css">
   <!-- endbuild -->
@@ -60,24 +60,25 @@
   </footer>
 </div>
 
-<!-- build:js(.) scripts/vendor.js -->
+<!-- build:js(.) /scripts/vendor.js -->
 <!-- bower:js -->
-<script src="bower_components/es5-shim/es5-shim.js"></script>
-<script src="bower_components/angular/angular.js"></script>
-<script src="bower_components/json3/lib/json3.js"></script>
-<script src="bower_components/angular-animate/angular-animate.js"></script>
-<script src="bower_components/angular-cookies/angular-cookies.js"></script>
-<script src="bower_components/angular-messages/angular-messages.js"></script>
-<script src="bower_components/angular-resource/angular-resource.js"></script>
-<script src="bower_components/angular-route/angular-route.js"></script>
-<script src="bower_components/angular-sanitize/angular-sanitize.js"></script>
-<script src="bower_components/angular-touch/angular-touch.js"></script>
-<script src="bower_components/leaflet/dist/leaflet.js"></script>
-<script src="bower_components/leaflet/dist/leaflet-src.js"></script>
+<script src="/bower_components/es5-shim/es5-shim.js"></script>
+<script src="/bower_components/angular/angular.js"></script>
+<script src="/bower_components/json3/lib/json3.js"></script>
+<script src="/bower_components/angular-animate/angular-animate.js"></script>
+<script src="/bower_components/angular-cookies/angular-cookies.js"></script>
+<script src="/bower_components/angular-messages/angular-messages.js"></script>
+<script src="/bower_components/angular-resource/angular-resource.js"></script>
+<script src="/bower_components/angular-route/angular-route.js"></script>
+<script src="/bower_components/angular-sanitize/angular-sanitize.js"></script>
+<script src="/bower_components/angular-touch/angular-touch.js"></script>
+<script src="/bower_components/leaflet/dist/leaflet.js"></script>
+<script src="/bower_components/leaflet/dist/leaflet-src.js"></script>
+<script src="/bower_components/angularytics/dist/angularytics.min.js"></script>
 <!-- endbower -->
 <!-- endbuild -->
 
-<!-- build:js scripts/scripts.js -->
+<!-- build:js /scripts/scripts.js -->
 <script src="/scripts/WirgeApp.js"></script>
 <script src="/scripts/WirgeUrlsService.js"></script>
 <script src="/scripts/userMessage/UserMessageService.js"></script>

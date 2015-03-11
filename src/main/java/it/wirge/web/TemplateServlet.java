@@ -30,7 +30,7 @@ public class TemplateServlet extends HttpServlet {
   public void init() {
     logger.info("init()");
     cfg = new Configuration(Configuration.VERSION_2_3_22);
-    cfg.setServletContextForTemplateLoading(getServletContext(), "templates");
+    cfg.setServletContextForTemplateLoading(getServletContext(), "/templates");
   }
 
   protected void doGet(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse)
