@@ -17,9 +17,16 @@ public class WirgeEndPoint extends ServerResource {
   public static final Logger logger = Logger.getLogger("WirgeEndPoint");
 
   public void verifyUserIsAdmin(){
+
     UserService userService = UserServiceFactory.getUserService();
     if (!userService.isUserLoggedIn() || !userService.isUserAdmin())
-      throw new ResourceException(Status.CLIENT_ERROR_FORBIDDEN, Constants.ERROR_UNAUTHORIZED);
+      throw new ResourceException(
+        Status.CLIENT_ERROR_FORBIDDEN,
+        Constants.ERROR_UNAUTHORIZED
+        );
+
+    ;
+
   }
 
 }
