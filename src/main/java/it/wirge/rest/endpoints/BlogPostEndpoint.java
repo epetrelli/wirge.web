@@ -6,6 +6,7 @@ import it.wirge.Constants;
 import it.wirge.Utils;
 import it.wirge.data.model.BlogPost;
 import it.wirge.rest.WirgeEndPoint;
+import org.restlet.Request;
 import org.restlet.data.Status;
 import org.restlet.resource.ResourceException;
 
@@ -23,8 +24,10 @@ public class BlogPostEndpoint extends WirgeEndPoint {
   @Produces({MediaType.APPLICATION_JSON})
   public List<BlogPost> findAll() {
     logger.info(Thread.currentThread().getStackTrace()[1].getMethodName() + "()");
+
     // Admins only
-    // verifyUserIsAdmin();
+    verifyUserIsAdmin();
+
     return ofy().load().type(BlogPost.class).list();
   }
 
@@ -35,7 +38,7 @@ public class BlogPostEndpoint extends WirgeEndPoint {
     logger.info(Thread.currentThread().getStackTrace()[1].getMethodName() + "(" + idBlogPost + ")");
 
     // Admins only
-    // verifyUserIsAdmin();
+    verifyUserIsAdmin();
 
     BlogPost blogPost = ofy().load().key(Key.create(BlogPost.class, idBlogPost)).now();
     if (blogPost == null) {
@@ -49,6 +52,9 @@ public class BlogPostEndpoint extends WirgeEndPoint {
   @Produces({MediaType.APPLICATION_JSON})
   public BlogPost create(BlogPost blogPost) {
     logger.info(Thread.currentThread().getStackTrace()[1].getMethodName() + "()");
+
+    // Admins only
+    verifyUserIsAdmin();
 
     if(blogPost.getIdBlogPost()==null) {
       blogPost.setDhCreated(new Date());
@@ -67,7 +73,7 @@ public class BlogPostEndpoint extends WirgeEndPoint {
   public BlogPost update(BlogPost blogPost) {
     logger.info(Thread.currentThread().getStackTrace()[1].getMethodName() + "()");
     // Admins only
-    // verifyUserIsAdmin();
+    verifyUserIsAdmin();
     return create(blogPost);
   }
 
@@ -76,7 +82,7 @@ public class BlogPostEndpoint extends WirgeEndPoint {
   public void remove(@PathParam("idBlogPost") Long idBlogPost) {
     logger.info(Thread.currentThread().getStackTrace()[1].getMethodName() + "(" + idBlogPost + ")");
     // Admins only
-    // verifyUserIsAdmin();
+    verifyUserIsAdmin();
     ofy().delete().key(Key.create(BlogPost.class, idBlogPost)).now();
   }
 }
