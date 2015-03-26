@@ -10,7 +10,7 @@
   <artifactId>web</artifactId>
 
   <properties>
-    <appengine.app.version>1</appengine.app.version>
+    <appengine.app.version>6</appengine.app.version>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <com.google.appengine.version>1.9.18</com.google.appengine.version>
     <restlet-version>3.0-M1</restlet-version>

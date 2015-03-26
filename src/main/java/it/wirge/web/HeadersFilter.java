@@ -20,24 +20,8 @@ public class HeadersFilter implements Filter
     HttpServletResponse httpServletResponse = (HttpServletResponse) response;
     HttpServletRequest httpServletRequest = (HttpServletRequest) request;
 
-//		String sRequest=httpServletRequest.getRequestURI();
-//		Enumeration enumeration = httpServletRequest.getParameterNames();
-//		while(enumeration.hasMoreElements())
-//		{
-//			String sParamenterName = enumeration.nextElement().toString();
-//			sRequest += " " + sParamenterName + "=" + request.getParameter(sParamenterName);
-//		}
-//		this.logger.info(sRequest);
-
     if (httpServletRequest.getHeader("origin")!=null)
     {
-      //this.logger.info("request for development");
-//			Enumeration enumer = httpServletRequest.getHeaderNames();
-//			while(enumer.hasMoreElements())
-//			{
-//				String sHeaderName = enumer.nextElement().toString();
-//				this.logger.info(sHeaderName + "=" + httpServletRequest.getHeader(sHeaderName));
-//			}
       httpServletResponse.addHeader("Access-Control-Allow-Origin", httpServletRequest.getHeader("origin"));
       httpServletResponse.addHeader("Access-Control-Allow-Methods", "GET, POST, PUT, OPTIONS, DELETE");
       httpServletResponse.addHeader("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, Cookie, Set-Cookie");
