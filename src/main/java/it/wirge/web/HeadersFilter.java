@@ -27,7 +27,21 @@ public class HeadersFilter implements Filter
       httpServletResponse.addHeader("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, Cookie, Set-Cookie");
       httpServletResponse.addHeader("Access-Control-Allow-Credentials", "true");
     }
-    chain.doFilter(httpServletRequest, httpServletResponse);
+
+
+    try {
+      chain.doFilter(httpServletRequest, httpServletResponse);
+    } catch (IOException e) {
+      e.printStackTrace();
+
+      e.getCause().printStackTrace();
+
+    } catch (ServletException e) {
+      e.printStackTrace();
+      e.getCause().printStackTrace();
+    }
+
+
   }
 
   public HeadersFilter()
