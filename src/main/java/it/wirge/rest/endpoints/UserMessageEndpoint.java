@@ -25,7 +25,7 @@ public class UserMessageEndpoint extends WirgeEndPoint {
   public List<UserMessage> findAll() {
     logger.info(Thread.currentThread().getStackTrace()[1].getMethodName() + "()");
     // Admins only
-    // verifyUserIsAdmin();
+    verifyUserIsAdmin();
     return ofy().load().type(UserMessage.class).list();
   }
 
@@ -36,7 +36,7 @@ public class UserMessageEndpoint extends WirgeEndPoint {
     logger.info(Thread.currentThread().getStackTrace()[1].getMethodName() + "(" + id + ")");
 
     // Admins only
-    // verifyUserIsAdmin();
+    verifyUserIsAdmin();
 
     UserMessage userMessage = ofy().load().key(Key.create(UserMessage.class, id)).now();
     if (userMessage == null) {
@@ -61,7 +61,7 @@ public class UserMessageEndpoint extends WirgeEndPoint {
   public UserMessage update(UserMessage userMessage) {
     logger.info(Thread.currentThread().getStackTrace()[1].getMethodName() + "()");
     // Admins only
-    // verifyUserIsAdmin();
+    verifyUserIsAdmin();
     return create(userMessage);
   }
 
@@ -70,7 +70,7 @@ public class UserMessageEndpoint extends WirgeEndPoint {
   public void remove(@PathParam("id") Long id) {
     logger.info(Thread.currentThread().getStackTrace()[1].getMethodName() + "(" + id + ")");
     // Admins only
-    // verifyUserIsAdmin();
+    verifyUserIsAdmin();
     ofy().delete().key(Key.create(UserMessage.class, id)).now();
   }
 }

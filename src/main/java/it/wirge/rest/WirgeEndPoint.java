@@ -22,17 +22,14 @@ public class WirgeEndPoint extends ServerResource {
 
     HttpServletRequest httpServletRequest = ServletUtils.getRequest(Request.getCurrent());
 
-    logger.info("*");
-    logger.info("*" + httpServletRequest.getRequestURL());
-
     if (httpServletRequest.getRequestURL().indexOf("localhost") < 0) {
       Cookie[] cookies = httpServletRequest.getCookies();
       boolean cookieFound = false;
 
       if (cookies != null) {
         for (Cookie cookie : cookies) {
-          if (cookie.getName().equals("wirge-user")) {
-            logger.info("cookie found (" + cookie.getValue() + ")");
+          if (cookie.getName().equals("appAdmin")) {
+            logger.info("Admin cookie found (" + cookie.getValue() + ")");
             return;
           }
         }

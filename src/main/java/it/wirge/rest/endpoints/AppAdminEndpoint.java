@@ -23,40 +23,48 @@ import java.util.List;
 import static com.googlecode.objectify.ObjectifyService.ofy;
 
 @Path("/appAdmin")
-public class AppAdmin extends WirgeEndPoint {
+public class AppAdminEndpoint extends WirgeEndPoint {
 
   @POST
   @Consumes({MediaType.APPLICATION_JSON})
   @Produces({MediaType.APPLICATION_JSON})
-  public Admin getAppAdmin(Admin gaeUser) {
+  public Admin isAppAdmin(Admin gaeUser) {
 
     logger.info(Thread.currentThread().getStackTrace()[1].getMethodName() + "(" + gaeUser.getEmail() + ")");
+    Admin admin = null;
 
-    Admin admin = ofy().load().key(Key.create(Admin.class, gaeUser.getUserId())).now();
-
-    if(admin!=null && admin.getIsAdmin()) {
-      logger.info("Admin " + gaeUser.getEmail() + " found.");
+    try {
       HttpServletResponse httpServletResponse = ServletUtils.getResponse(Response.getCurrent());
-      Cookie adminCookie = new Cookie("appAdmin", admin.getUserId());
-      httpServletResponse.addCookie(adminCookie);
+      admin = ofy().load().key(Key.create(Admin.class, gaeUser.getUserId())).now();
 
-    }
-    else{
-
-      logger.info("Admin " + gaeUser.getEmail() + " not found.");
-
-      List<Admin> admins = ofy().load().type(Admin.class).list();
-
-      if(admins==null || admins.isEmpty()){
-        logger.info(" - This is the first admin: inserting as admin:");
-        gaeUser.setIsAdmin(Boolean.TRUE);
+      if(admin!=null && admin.getIsAdmin()) {
+        logger.info("Admin " + gaeUser.getEmail() + " found.");
+        addAdminCookie(admin, httpServletResponse);
+        return admin;
       }
-      ofy().save().entity(gaeUser).now();
-      logger.info(" - Inserted");
+      else{
+        logger.info("Admin " + gaeUser.getEmail() + " not found.");
+        List<Admin> admins = ofy().load().type(Admin.class).list();
 
+        if(admins==null || admins.isEmpty()){
+          logger.info(" - This is the first admin: inserting as admin:");
+          gaeUser.setIsAdmin(Boolean.TRUE);
+          addAdminCookie(gaeUser, httpServletResponse);
+        }
+        ofy().save().entity(gaeUser).now();
+        logger.info(" - Inserted");
+        return gaeUser;
+      }
+    } catch (Exception e) {
+      e.printStackTrace();
     }
+    return null;
+  }
 
-    return admin;
+  private void addAdminCookie(Admin admin, HttpServletResponse httpServletResponse){
+
+    Cookie adminCookie = new Cookie("appAdmin", admin.getUserId());
+    httpServletResponse.addCookie(adminCookie);
   }
 
   /*

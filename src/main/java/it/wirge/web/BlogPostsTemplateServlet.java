@@ -1,6 +1,5 @@
 package it.wirge.web;
 
-import com.googlecode.objectify.Key;
 import freemarker.template.Configuration;
 import freemarker.template.Template;
 import freemarker.template.TemplateException;
@@ -12,6 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.Writer;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -22,10 +22,10 @@ import static com.googlecode.objectify.ObjectifyService.ofy;
 /**
  * Created by enricopetrelli on 05/03/15.
  */
-public class TemplateServlet extends HttpServlet {
+public class BlogPostsTemplateServlet extends HttpServlet {
 
   private Configuration cfg;
-  static Logger logger = Logger.getLogger(TemplateServlet.class.getName());
+  static Logger logger = Logger.getLogger(BlogPostsTemplateServlet.class.getName());
 
   public void init() {
     logger.info("init()");
@@ -36,24 +36,12 @@ public class TemplateServlet extends HttpServlet {
   protected void doGet(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse)
     throws ServletException, IOException {
 
-    // based on request, here is found the right blogPost
-    // which is the data-model
-
-    String sCompletePath = httpServletRequest.getRequestURI();
-    String[] saCompletePath = sCompletePath.split("\\/");
-    String sLastToken = saCompletePath[saCompletePath.length-1];
-    BlogPost blogPost = ofy().load().type(BlogPost.class).filter("ulLink", sLastToken).first().now();
-
-    if(blogPost == null || !blogPost.getPublished()) {
-      logger.info("Not found");
-      httpServletResponse.sendError(HttpServletResponse.SC_NOT_FOUND);
-      return;
-    }
-
-    logger.info(blogPost.getNmTitle());
+    Map<String, Object> model = new HashMap<String, Object>();
+    List<BlogPost> blogPosts = ofy().load().type(BlogPost.class).list();
+    model.put("blogPosts", blogPosts);
 
     // Get the templat object
-    Template t = cfg.getTemplate("blogPost.ftl");
+    Template t = cfg.getTemplate("blogPosts.ftl");
 
     // Prepare the HTTP response:
     // - Use the charset of template for the output
@@ -63,8 +51,9 @@ public class TemplateServlet extends HttpServlet {
 
     // Merge the data-model and the template
     try {
-      t.process(blogPost, out);
+      t.process(model, out);
     } catch (TemplateException e) {
+      e.printStackTrace();
       throw new ServletException(
         "Error while processing FreeMarker template", e);
     }

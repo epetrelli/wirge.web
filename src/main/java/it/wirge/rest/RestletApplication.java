@@ -1,6 +1,6 @@
 package it.wirge.rest;
 
-import it.wirge.rest.endpoints.AppAdmin;
+import it.wirge.rest.endpoints.AppAdminEndpoint;
 import it.wirge.rest.endpoints.BlogPostEndpoint;
 import it.wirge.rest.endpoints.UserMessageEndpoint;
 
@@ -29,7 +29,7 @@ public class RestletApplication extends Application {
 
     resourceClasses.add(UserMessageEndpoint.class);
     resourceClasses.add(BlogPostEndpoint.class);
-    resourceClasses.add(AppAdmin.class);
+    resourceClasses.add(AppAdminEndpoint.class);
 
     return resourceClasses;
   }

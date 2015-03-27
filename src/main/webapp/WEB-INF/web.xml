@@ -57,12 +57,21 @@
   </servlet-mapping>
 
   <servlet>
-    <servlet-name>TemplateServlet</servlet-name>
-    <servlet-class>it.wirge.web.TemplateServlet</servlet-class>
+    <servlet-name>BlogPostTemplateServlet</servlet-name>
+    <servlet-class>it.wirge.web.BlogPostTemplateServlet</servlet-class>
   </servlet>
   <servlet-mapping>
-    <servlet-name>TemplateServlet</servlet-name>
+    <servlet-name>BlogPostTemplateServlet</servlet-name>
     <url-pattern>/blog/*</url-pattern>
+  </servlet-mapping>
+
+  <servlet>
+    <servlet-name>BlogPostsTemplateServlet</servlet-name>
+    <servlet-class>it.wirge.web.BlogPostsTemplateServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>BlogPostsTemplateServlet</servlet-name>
+    <url-pattern>/blog.html</url-pattern>
   </servlet-mapping>
 
   <security-constraint>
