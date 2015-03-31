@@ -28,7 +28,7 @@ WirgeApp.controller('UserMessageController', ['$scope', 'UserMessageService',
     if($('#mapholder').html()!==undefined){
       // Map setup:
       // create a map in the 'map' div, set the view to a given place and zoom
-      var map = L.map('map').setView([45.43, 9.18], 14);
+      var map = L.map('map').setView([45.43, 9.18], 11);
       L.Icon.Default.imagePath = '/images';
       // add an OpenStreetMap tile layer
       L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
@@ -36,6 +36,9 @@ WirgeApp.controller('UserMessageController', ['$scope', 'UserMessageService',
       }).addTo(map);
       // add a marker in the given location, attach some popup content to it and open the popup
       L.marker([45.423786, 9.168037]).addTo(map)
+        .bindPopup('<img alt="WIRGE" src="/images/wirge_logo.png">')
+        .openPopup();
+      L.marker([45.490904, 9.204557]).addTo(map)
         .bindPopup('<img alt="WIRGE" src="/images/wirge_logo.png">')
         .openPopup();
     }

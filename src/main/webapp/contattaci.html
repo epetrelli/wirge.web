@@ -33,13 +33,15 @@
         </div>
 
       <div id="navbar" class="navbar-collapse collapse">
-          <ul class="nav navbar-nav navbar-right">
-            <li><a href="/">Home</a></li>
-            <li><a href="chi-siamo.html">Chi siamo</a></li>
-            <li><a href="portfolio.html">Portfolio</a></li>
-            <li><a href="contattaci.html">Contattaci</a></li>
-          </ul>
-        </div>
+        <ul class="nav navbar-nav navbar-right">
+          <li><a href="/#">Home</a></li>
+          <li><a href="/chi-siamo.html">Chi siamo</a></li>
+          <li><a href="/portfolio.html">Portfolio</a></li>
+          <li><a href="/blog.html">Blog</a></li>
+          <li class="active"><a href="/contattaci.html">Contattaci</a></li>
+        </ul>
+      </div>
+
 
 
     </nav>
@@ -52,21 +54,7 @@
         <div class="panel-body">
           <form class="form-horizontal" name="userMessageForm">
             <div class="form-group">
-              <label class="col-sm-3 control-label" for="userMessage.nmFromName">Nome</label>
-              <div class="col-sm-6">
-                <input type="text" class="form-control" id="userMessage.nmFromName" ng-model="userMessage.nmFromName" placeholder="Nome" ng-required="true">
-              </div>
-              <div class="col-sm-3"></div>
-            </div>
-            <div class="form-group">
-              <label class="col-sm-3 control-label" for="userMessage.nmFromEMail">Indirizzo e-mail</label>
-              <div class="col-sm-6">
-                <input type="email" class="form-control" id="userMessage.nmFromEMail" ng-model="userMessage.nmFromEMail" placeholder="Indirizzo e-mail" ng-required="true">
-              </div>
-              <div class="col-sm-3"></div>
-            </div>
-            <div class="form-group">
-              <label class="col-sm-3 control-label" for="userMessage.txtMessage">Testo del messaggio</label>
+              <label class="col-sm-3 control-label" for="userMessage.txtMessage">Messaggio</label>
               <div class="col-sm-6">
                 <textarea
                   class="form-control"
@@ -83,7 +71,6 @@
             <div class="form-group">
               <div class="col-sm-3"></div>
               <div class="col-sm-6">
-                <span class="small text-muted hidden-xs">compila tutti i campi</span>
                 <button
                   class="btn btn-primary pull-right"
                   data-ng-disabled="!userMessageForm.$valid"
@@ -147,13 +134,22 @@
         <div class="well">
           <address>
             <i>Sede legale:</i>
-            <br>
-            <br>WIRGE
+            <br><strong>WIRGE</strong>
             <br>Alzaia Naviglio Pavese 276
             <br>20142 Milano
             <br>
-            <br><a href="tel:+390239226217">Tel: +39 02 39226217</a>
           </address>
+
+          <address>
+            <i>Sede operaativa:</i>
+            <br><strong>WIRGE</strong>
+            <br>Via Copernico 38
+            <br>20125 Milano
+            <br>
+          </address>
+
+          <a href="tel:+390239226217">Tel: +39 02 39226217</a>
+
         </div>
       </div>
     </div>

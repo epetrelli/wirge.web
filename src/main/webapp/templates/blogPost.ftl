@@ -35,13 +35,15 @@
     </div>
 
     <div id="navbar" class="navbar-collapse collapse">
-      <ul class="nav navbar-nav navbar-right">
-        <li><a href="#">Home</a></li>
-        <li><a href="/chi-siamo.html">Chi siamo</a></li>
-        <li><a href="/portfolio.html">Portfolio</a></li>
-        <li><a href="/contattaci.html">Contattaci</a></li>
-      </ul>
+        <ul class="nav navbar-nav navbar-right">
+            <li><a href="/#">Home</a></li>
+            <li><a href="/chi-siamo.html">Chi siamo</a></li>
+            <li><a href="/portfolio.html">Portfolio</a></li>
+            <li class="active"><a href="/blog.html">Blog</a></li>
+            <li><a href="/contattaci.html">Contattaci</a></li>
+        </ul>
     </div>
+
 
   </nav>
 
