@@ -46,7 +46,7 @@
   </nav>
 
   <h1>Blog</h1>
-  <p class="lead">Pensieri, ragionamenti, dubbi e soluzioni</p>
+  <p class="lead">Pensieri, ragionamenti, dubbi...</p>
 
   <hr>
 
