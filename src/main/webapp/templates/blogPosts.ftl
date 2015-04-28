@@ -21,21 +21,20 @@
 
 <div class="container">
 
-  <nav class="navbar navbar-default">
+    <nav class="navbar navbar-default">
 
-    <div class="navbar-header">
-      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar"
-              aria-expanded="false" aria-controls="navbar">
-        <span class="sr-only">Toggle navigation</span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-      </button>
-      <a class="navbar-brand" href="/"><img src="/images/wirge_logo.png" alt="WIRGE Home Page"></a>
-    </div>
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/"><img src="/images/wirge_logo.png" alt="WIRGE Home Page"></a>
+        </div>
 
-    <div id="navbar" class="navbar-collapse collapse">
-        <ul class="nav navbar-nav navbar-right">
+        <div id="navbar" class="navbar-collapse collapse">
+            <ul class="nav navbar-nav navbar-right">
             <li><a href="/#">Home</a></li>
             <li><a href="/chi-siamo.html">Chi siamo</a></li>
             <!--li><a href="/portfolio.html">Portfolio</a></li-->
@@ -93,6 +92,8 @@
 <!-- endbuild -->
 
 <!-- build:js /scripts/scripts.js -->
+<script src="/bower_components/jquery/dist/jquery.js"></script>
+<script src="/bower_components/bootstrap/dist/js/bootstrap.js"></script>
 <script src="/scripts/WirgeApp.js"></script>
 <script src="/scripts/WirgeUrlsService.js"></script>
 <script src="/scripts/userMessage/UserMessageService.js"></script>
