@@ -7,9 +7,9 @@
  * # UserMessageController
  * Controller to send messages to the app
  */
-WirgeApp.controller('UserMessageController', ['$scope', 'UserMessageService',
+WirgeApp.controller('UserMessageController', ['$scope', '$window', 'UserMessageService',
 
-  function ($scope, userMessageService) {
+  function ($scope, $window, userMessageService) {
 
     $scope.userMessage = {};
 
@@ -19,7 +19,12 @@ WirgeApp.controller('UserMessageController', ['$scope', 'UserMessageService',
         console.log('success: ' + userMessage);
         $scope.userMessage = userMessage;
         $('#userMessageConfirm').modal({show:true});
+
+        $window.ga('send', 'event', 'Messages', 'sendMessage', '', userMessage.txtMessage);
+
         $scope.userMessage = {};
+
+
       }, function (reason) {
         console.log(reason);
       });

@@ -286,6 +286,7 @@ module.exports = function (grunt) {
           conservativeCollapse: true,
           collapseBooleanAttributes: true,
           removeCommentsFromCDATA: true,
+          removeComments: true,
           removeOptionalTags: true
         },
         files: [{

@@ -1,7 +1,6 @@
 <!doctype html>
 <html class="no-js">
 <head>
-  <meta charset="utf-8">
   <title>${nmTitle}</title>
   <meta name="description" content="${nmDescription}">
   <meta name="viewport" content="width=device-width">
@@ -24,7 +23,8 @@
     <nav class="navbar navbar-default">
 
         <div class="navbar-header">
-            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar"
+                    aria-expanded="false" aria-controls="navbar">
                 <span class="sr-only">Toggle navigation</span>
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
@@ -43,13 +43,15 @@
             </ul>
         </div>
 
+    </nav>
 
-  <h1>${nmTitle}</h1>
-  <p class="lead">${nmSubtitle}</p>
+    <h1>${nmTitle}</h1>
 
-  <hr>
+    <p class="lead">${nmSubtitle}</p>
 
-  <p>${txText.value}</p>
+    <hr>
+
+    <p>${txText.value}</p>
 
 </div>
 
@@ -58,6 +60,12 @@
     <p>&copy; 2015 WIRGE &middot; PI 01351660996</p>
   </footer>
 </div>
+
+<script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+    ga('create', 'UA-46615962-1', 'auto');
+    ga('send', 'pageview');
+</script>
 
 <!-- build:js(.) /scripts/vendor.js -->
 <!-- bower:js -->

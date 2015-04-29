@@ -1,20 +1,19 @@
 <!doctype html>
 <html class="no-js">
 <head>
-  <meta charset="utf-8">
-  <title>Blog</title>
-  <meta name="description" content="Raccolta di pensieri, proposte, dubbi e qualche soluzione">
-  <meta name="viewport" content="width=device-width">
-  <!-- build:css(.tmp) /styles/vendor.css -->
-  <!-- bower:css -->
-  <link rel="stylesheet" href="/bower_components/leaflet/dist/leaflet.css" />
-  <!-- endbower -->
-  <!-- endbuild -->
+    <title>Blog</title>
+    <meta name="description" content="Raccolta di pensieri, proposte, dubbi e qualche soluzione">
+    <meta name="viewport" content="width=device-width">
+    <!-- build:css(.tmp) /styles/vendor.css -->
+    <!-- bower:css -->
+    <link rel="stylesheet" href="/bower_components/leaflet/dist/leaflet.css" />
+    <!-- endbower -->
+    <!-- endbuild -->
 
-  <!-- build:css(.tmp) /styles/main.css -->
-  <link rel="stylesheet" href="/styles/wirge-bootstrap.css">
-  <link rel="stylesheet" href="/styles/main.css">
-  <!-- endbuild -->
+    <!-- build:css(.tmp) /styles/main.css -->
+    <link rel="stylesheet" href="/styles/wirge-bootstrap.css">
+    <link rel="stylesheet" href="/styles/main.css">
+    <!-- endbuild -->
 </head>
 
 <body>
@@ -24,7 +23,8 @@
     <nav class="navbar navbar-default">
 
         <div class="navbar-header">
-            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar"
+                    aria-expanded="false" aria-controls="navbar">
                 <span class="sr-only">Toggle navigation</span>
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
@@ -35,43 +35,53 @@
 
         <div id="navbar" class="navbar-collapse collapse">
             <ul class="nav navbar-nav navbar-right">
-            <li><a href="/#">Home</a></li>
-            <li><a href="/chi-siamo.html">Chi siamo</a></li>
-            <!--li><a href="/portfolio.html">Portfolio</a></li-->
-            <li class="active"><a href="/blog.html">Blog</a></li>
-            <li><a href="/contattaci.html">Contattaci</a></li>
-        </ul>
-    </div>
+                <li><a href="/#">Home</a></li>
+                <li><a href="/chi-siamo.html">Chi siamo</a></li>
+                <!--li><a href="/portfolio.html">Portfolio</a></li-->
+                <li class="active"><a href="/blog.html">Blog</a></li>
+                <li><a href="/contattaci.html">Contattaci</a></li>
+            </ul>
+        </div>
 
-  </nav>
+    </nav>
 
-  <h1>Blog</h1>
-  <p class="lead">Pensieri, ragionamenti, dubbi...</p>
+    <h1>Blog</h1>
 
-  <hr>
+    <p class="lead">Pensieri, ragionamenti, dubbi...</p>
 
-  <#list blogPosts as blogPost>
-    <#if blogPost.published>
-      <h2>${blogPost.nmTitle}</h2>
-      <h3>${blogPost.nmSubtitle}</h3>
-      <p class="small">${blogPost.dhCreated?string('dd/MM/yyyy')}</p>
-      <p>
-      <#if blogPost.txText.value?length &gt; 250>
-        ${blogPost.txText.value[0..249]}... <a href="/blog/${blogPost.ulLink}">Continua <span class="glyphicon glyphicon-chevron-right"></span></a></p>
-      <#else>
-        ${blogPost.txText.value} <a href="/blog/${blogPost.ulLink}">Continua <span class="glyphicon glyphicon-chevron-right"></span></a></p>
+    <hr>
+
+    <#list blogPosts as blogPost>
+      <#if blogPost.published>
+          <h2>${blogPost.nmTitle}</h2>
+
+          <h3>${blogPost.nmSubtitle}</h3>
+
+          <p class="small">${blogPost.dhCreated?string('dd/MM/yyyy')}</p>
+          <p>
+        <#if blogPost.txText.value?length &gt; 250>
+          ${blogPost.txText.value[0..249]}... <a href="/blog/${blogPost.ulLink}">Continua <span class="glyphicon glyphicon-chevron-right"></span></a></p>
+        <#else>
+          ${blogPost.txText.value} <a href="/blog/${blogPost.ulLink}">Continua <span class="glyphicon glyphicon-chevron-right"></span></a>
+          </p>
+        </#if>
       </#if>
-    </#if>
-  </#list>
+    </#list>
 
 
 </div>
 
 <div class="container">
-  <footer class="footer">
-    <p>&copy; 2015 WIRGE &middot; PI 01351660996</p>
-  </footer>
+    <footer class="footer">
+        <p>&copy; 2015 WIRGE &middot; PI 01351660996</p>
+    </footer>
 </div>
+
+<script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+    ga('create', 'UA-46615962-1', 'auto');
+    ga('send', 'pageview');
+</script>
 
 <!-- build:js(.) /scripts/vendor.js -->
 <!-- bower:js -->
