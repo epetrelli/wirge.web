@@ -9,6 +9,17 @@
     </system-properties>
 
   <static-files>
+    <include path="/images/*.*" expiration="10d" />
+    <include path="/fonts/*.*" expiration="10d" />
+    <include path="/scripts/*.*" expiration="10d">
+      <http-header name="Vary" value="Accept-Encoding" />
+    </include>
+    <include path="/styles/*.*" expiration="10d">
+      <http-header name="Vary" value="Accept-Encoding" />
+    </include>
+    <include path="/*.html">
+      <http-header name="Content-Type" value="text/html; charset=UTF-8" />
+    </include>
     <exclude path="/blog/**.*"/>
   </static-files>
 
