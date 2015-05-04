@@ -20,7 +20,8 @@ WirgeApp.controller('UserMessageController', ['$scope', '$window', 'UserMessageS
         $scope.userMessage = userMessage;
         $('#userMessageConfirm').modal({show:true});
 
-        $window.ga('send', 'event', 'Messages', 'sendMessage', '', userMessage.txtMessage);
+        //ga('send', 'event', 'category', 'action', 'label', value);  // value is a number.
+        $window.ga('send', 'event', 'Messages', 'sendMessage', '');
 
         $scope.userMessage = {};
 
