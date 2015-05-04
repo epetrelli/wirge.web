@@ -1,3 +1,4 @@
+<#ftl encoding="utf-8">
 <!doctype html>
 <html class="no-js">
 <head>
