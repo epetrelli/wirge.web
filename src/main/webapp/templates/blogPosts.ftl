@@ -2,6 +2,7 @@
 <html class="no-js">
 <head>
     <title>Blog</title>
+    <meta charset="utf-8">
     <meta name="description" content="Raccolta di pensieri, proposte, dubbi e qualche soluzione">
     <meta name="viewport" content="width=device-width">
     <!-- build:css(.tmp) /styles/vendor.css -->
