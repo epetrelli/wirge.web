@@ -5,6 +5,7 @@ import com.google.appengine.api.users.UserServiceFactory;
 import com.googlecode.objectify.Key;
 import it.wirge.data.model.UserMessage;
 import it.wirge.rest.WirgeEndPoint;
+import it.wirge.utils.Mailer;
 import org.restlet.data.Status;
 import org.restlet.resource.ResourceException;
 import org.restlet.resource.ServerResource;
@@ -52,6 +53,13 @@ public class UserMessageEndpoint extends WirgeEndPoint {
     logger.info(Thread.currentThread().getStackTrace()[1].getMethodName() + "()");
     userMessage.setDhCreated(new Date());
     ofy().save().entity(userMessage).now();
+
+    Mailer.sendMessage(
+      "enrico.petrelli@wirge.it",
+      "enrico.petrelli@wirge.it",
+      "New Message",
+      userMessage.getTxtMessage());
+
     return userMessage;
   }
 
