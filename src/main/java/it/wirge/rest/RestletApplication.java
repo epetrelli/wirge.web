@@ -2,6 +2,7 @@ package it.wirge.rest;
 
 import it.wirge.rest.endpoints.AppAdminEndpoint;
 import it.wirge.rest.endpoints.BlogPostEndpoint;
+import it.wirge.rest.endpoints.ImageEndpoint;
 import it.wirge.rest.endpoints.UserMessageEndpoint;
 
 import java.util.HashSet;
@@ -30,6 +31,7 @@ public class RestletApplication extends Application {
     resourceClasses.add(UserMessageEndpoint.class);
     resourceClasses.add(BlogPostEndpoint.class);
     resourceClasses.add(AppAdminEndpoint.class);
+    resourceClasses.add(ImageEndpoint.class);
 
     return resourceClasses;
   }
