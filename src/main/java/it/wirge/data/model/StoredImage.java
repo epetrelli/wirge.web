@@ -1,5 +1,6 @@
 package it.wirge.data.model;
 
+import com.google.appengine.api.datastore.Blob;
 import com.googlecode.objectify.annotation.Entity;
 import com.googlecode.objectify.annotation.Id;
 
@@ -12,7 +13,7 @@ import com.googlecode.objectify.annotation.Id;
 public class StoredImage {
   @Id
   private Long idStoredImage;
-  private String baBytes;
+  private Blob baBytes;
   private String nmAlternate;
   private String nmFile;
   private Integer iOriginalW;
@@ -26,11 +27,11 @@ public class StoredImage {
     this.idStoredImage = idStoredImage;
   }
 
-  public String getBaBytes() {
+  public Blob getBaBytes() {
     return baBytes;
   }
 
-  public void setBaBytes(String baBytes) {
+  public void setBaBytes(Blob baBytes) {
     this.baBytes = baBytes;
   }
 

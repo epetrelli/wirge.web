@@ -2,18 +2,26 @@ package it.wirge.rest.endpoints;
 
 import com.google.appengine.api.blobstore.BlobstoreService;
 import com.google.appengine.api.blobstore.BlobstoreServiceFactory;
+import com.google.appengine.api.datastore.Blob;
 import com.googlecode.objectify.Key;
+import it.wirge.data.model.StoredImage;
 import it.wirge.data.model.UploadUrl;
 import it.wirge.data.model.UserMessage;
 import it.wirge.rest.WirgeEndPoint;
 import it.wirge.utils.Mailer;
+import org.apache.commons.fileupload.FileItem;
+import org.apache.commons.fileupload.FileItemFactory;
+import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.restlet.data.Status;
+import org.restlet.ext.fileupload.RestletFileUpload;
+import org.restlet.ext.jaxrs.internal.provider.FileUploadProvider;
+import org.restlet.representation.Representation;
 import org.restlet.resource.ResourceException;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
-import java.util.Date;
-import java.util.List;
+import java.io.File;
+import java.util.*;
 
 import static com.googlecode.objectify.ObjectifyService.ofy;
 
@@ -22,15 +30,15 @@ public class ImageEndpoint extends WirgeEndPoint {
 
   @GET
   @Produces({MediaType.APPLICATION_JSON})
-  public List<UserMessage> findAll() {
+  public List<StoredImage> findAll() {
     logger.info(Thread.currentThread().getStackTrace()[1].getMethodName() + "()");
     // Admins only
     verifyUserIsAdmin();
-    return ofy().load().type(UserMessage.class).list();
+    return ofy().load().type(StoredImage.class).list();
   }
 
   @GET
-  @Path("/uploadUrl")
+  @Path("uploadUrl")
   @Produces({MediaType.APPLICATION_JSON})
   public UploadUrl getUploadUrl() {
     logger.info(Thread.currentThread().getStackTrace()[1].getMethodName() + "()");
@@ -60,20 +68,44 @@ public class ImageEndpoint extends WirgeEndPoint {
   }
 
   @POST
-  @Consumes({MediaType.APPLICATION_JSON})
   @Produces({MediaType.APPLICATION_JSON})
-  public UserMessage create(UserMessage userMessage) {
+  public StoredImage create(Representation entity) {
     logger.info(Thread.currentThread().getStackTrace()[1].getMethodName() + "()");
-    userMessage.setDhCreated(new Date());
-    ofy().save().entity(userMessage).now();
 
-    Mailer.sendMessage(
-      "enrico.petrelli@wirge.it",
-      "enrico.petrelli@wirge.it",
-      "New Message",
-      userMessage.getTxtMessage());
+    // 1/ Create a factory for disk-based file items
+    DiskFileItemFactory factory = new DiskFileItemFactory();
+    factory.setSizeThreshold(1000240);
 
-    return userMessage;
+    StoredImage storedImage = new StoredImage();
+    RestletFileUpload upload = new RestletFileUpload(factory);
+    List<FileItem> items;
+
+    try {
+      // Request is parsed by the handler which generates a list of FileItems
+      items = upload.parseRepresentation(entity);
+
+      Map<String, String> props = new HashMap<>();
+
+      for (final Iterator<FileItem> it = items.iterator(); it.hasNext(); ) {
+        FileItem fi = it.next();
+        String name = fi.getName();
+        if (name == null) {
+          logger.info(fi.getFieldName() + "=" + new String(fi.get(), "UTF-8"));
+          props.put(fi.getFieldName(), new String(fi.get(), "UTF-8"));
+        } else {
+          logger.info("File: " + fi.getSize() + " bytes");
+
+          storedImage.setNmFile(name);
+          storedImage.setBaBytes(new Blob(fi.get()));
+
+        }
+      }
+      ofy().save().entity(storedImage).now();
+
+    } catch (Exception e) {
+      e.printStackTrace();
+    }
+    return storedImage;
   }
 
   @PUT
@@ -83,7 +115,7 @@ public class ImageEndpoint extends WirgeEndPoint {
     logger.info(Thread.currentThread().getStackTrace()[1].getMethodName() + "()");
     // Admins only
     verifyUserIsAdmin();
-    return create(userMessage);
+    return null; // create(something (entity));
   }
 
   @DELETE

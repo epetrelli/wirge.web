@@ -30,15 +30,27 @@ public class HeadersFilter implements Filter
 
 
     try {
+
       chain.doFilter(httpServletRequest, httpServletResponse);
-    } catch (IOException e) {
-      e.printStackTrace();
 
-      e.getCause().printStackTrace();
+    }
+    catch (IOException e) {
 
-    } catch (ServletException e) {
       e.printStackTrace();
       e.getCause().printStackTrace();
+
+    }
+    catch (ServletException e) {
+
+      e.printStackTrace();
+      e.getCause().printStackTrace();
+
+    }
+    catch (Exception e) {
+
+      e.printStackTrace();
+      e.getCause().printStackTrace();
+
     }
 
 

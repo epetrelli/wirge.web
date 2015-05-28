@@ -3,6 +3,7 @@ package it.wirge.data;
 import com.googlecode.objectify.ObjectifyService;
 import it.wirge.data.model.Admin;
 import it.wirge.data.model.BlogPost;
+import it.wirge.data.model.StoredImage;
 import it.wirge.data.model.UserMessage;
 
 import javax.servlet.ServletException;
@@ -23,6 +24,7 @@ public class ObjectifyStartupServlet extends HttpServlet {
     ObjectifyService.register(UserMessage.class);
     ObjectifyService.register(BlogPost.class);
     ObjectifyService.register(Admin.class);
+    ObjectifyService.register(StoredImage.class);
     logger.info("ObjectifyService created");
   }
 

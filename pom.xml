@@ -71,6 +71,11 @@
       <artifactId>org.restlet.ext.servlet</artifactId>
       <version>${restlet-version}</version>
     </dependency>
+    <dependency>
+      <groupId>org.restlet.gae</groupId>
+      <artifactId>org.restlet.ext.fileupload</artifactId>
+      <version>${restlet-version}</version>
+    </dependency>
 
     <!-- Templating -->
     <dependency>
