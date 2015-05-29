@@ -74,6 +74,15 @@
     <url-pattern>/blog.html</url-pattern>
   </servlet-mapping>
 
+  <servlet>
+    <servlet-name>ImagesServlet</servlet-name>
+    <servlet-class>it.wirge.web.ImagesServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ImagesServlet</servlet-name>
+    <url-pattern>/storedImages/*</url-pattern>
+  </servlet-mapping>
+
   <security-constraint>
     <web-resource-collection>
       <web-resource-name>manage</web-resource-name>

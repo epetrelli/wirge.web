@@ -3,6 +3,9 @@ package it.wirge.rest.endpoints;
 import com.google.appengine.api.blobstore.BlobstoreService;
 import com.google.appengine.api.blobstore.BlobstoreServiceFactory;
 import com.google.appengine.api.datastore.Blob;
+import com.google.appengine.api.images.Image;
+import com.google.appengine.api.images.ImagesService;
+import com.google.appengine.api.images.ImagesServiceFactory;
 import com.googlecode.objectify.Key;
 import it.wirge.data.model.StoredImage;
 import it.wirge.data.model.UploadUrl;
@@ -89,15 +92,21 @@ public class ImageEndpoint extends WirgeEndPoint {
       for (final Iterator<FileItem> it = items.iterator(); it.hasNext(); ) {
         FileItem fi = it.next();
         String name = fi.getName();
+
+        // TODO: Check for file univocity
+
         if (name == null) {
           logger.info(fi.getFieldName() + "=" + new String(fi.get(), "UTF-8"));
           props.put(fi.getFieldName(), new String(fi.get(), "UTF-8"));
         } else {
           logger.info("File: " + fi.getSize() + " bytes");
-
+          byte[] baImageData = fi.get();
+          ImagesService imagesService = ImagesServiceFactory.getImagesService();
+          Image uploadedImage = ImagesServiceFactory.makeImage(baImageData);
+          storedImage.setiOriginalW(uploadedImage.getWidth());
+          storedImage.setiOriginalH(uploadedImage.getHeight());
           storedImage.setNmFile(name);
-          storedImage.setBaBytes(new Blob(fi.get()));
-
+          storedImage.setBaBytes(new Blob(baImageData));
         }
       }
       ofy().save().entity(storedImage).now();
