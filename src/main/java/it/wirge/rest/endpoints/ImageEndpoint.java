@@ -14,6 +14,7 @@ import it.wirge.rest.WirgeEndPoint;
 import it.wirge.utils.Mailer;
 import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.fileupload.FileItemFactory;
+import org.apache.commons.fileupload.FileUploadException;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.restlet.data.Status;
 import org.restlet.ext.fileupload.RestletFileUpload;
@@ -24,6 +25,7 @@ import org.restlet.resource.ResourceException;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import java.io.File;
+import java.io.UnsupportedEncodingException;
 import java.util.*;
 
 import static com.googlecode.objectify.ObjectifyService.ofy;
@@ -37,9 +39,10 @@ public class ImageEndpoint extends WirgeEndPoint {
     logger.info(Thread.currentThread().getStackTrace()[1].getMethodName() + "()");
     // Admins only
     verifyUserIsAdmin();
-    return ofy().load().type(StoredImage.class).list();
+    return ofy().load().type(StoredImage.class).order("-dhCreated").list();
   }
 
+/*
   @GET
   @Path("uploadUrl")
   @Produces({MediaType.APPLICATION_JSON})
@@ -53,6 +56,7 @@ public class ImageEndpoint extends WirgeEndPoint {
     uploadUrl.setUrl(blobstoreService.createUploadUrl("/upload"));
     return uploadUrl;
   }
+*/
 
   @GET
   @Path("{id}")
@@ -72,7 +76,7 @@ public class ImageEndpoint extends WirgeEndPoint {
 
   @POST
   @Produces({MediaType.APPLICATION_JSON})
-  public StoredImage create(Representation entity) {
+  public StoredImage create(Representation entity) throws UnsupportedEncodingException, FileUploadException {
     logger.info(Thread.currentThread().getStackTrace()[1].getMethodName() + "()");
 
     // 1/ Create a factory for disk-based file items
@@ -91,11 +95,15 @@ public class ImageEndpoint extends WirgeEndPoint {
 
       for (final Iterator<FileItem> it = items.iterator(); it.hasNext(); ) {
         FileItem fi = it.next();
-        String name = fi.getName();
+        String nmFile = fi.getName();
 
-        // TODO: Check for file univocity
+        if(ofy().load().type(StoredImage.class).filter("nmFile", nmFile).first().now()!=null){
+          // Image already loaded: throw exception
+          logger.info("A file with same name (" + nmFile + ") has already been uploaded");
+          throw new ResourceException(Status.CLIENT_ERROR_CONFLICT);
+        }
 
-        if (name == null) {
+        if (nmFile == null) {
           logger.info(fi.getFieldName() + "=" + new String(fi.get(), "UTF-8"));
           props.put(fi.getFieldName(), new String(fi.get(), "UTF-8"));
         } else {
@@ -103,9 +111,10 @@ public class ImageEndpoint extends WirgeEndPoint {
           byte[] baImageData = fi.get();
           ImagesService imagesService = ImagesServiceFactory.getImagesService();
           Image uploadedImage = ImagesServiceFactory.makeImage(baImageData);
+          storedImage.setDhCreated(new Date());
           storedImage.setiOriginalW(uploadedImage.getWidth());
           storedImage.setiOriginalH(uploadedImage.getHeight());
-          storedImage.setNmFile(name);
+          storedImage.setNmFile(nmFile);
           storedImage.setBaBytes(new Blob(baImageData));
         }
       }
@@ -113,10 +122,13 @@ public class ImageEndpoint extends WirgeEndPoint {
 
     } catch (Exception e) {
       e.printStackTrace();
+      throw e;
+      //TODO: manage image conflicts
     }
     return storedImage;
   }
 
+  /*
   @PUT
   @Consumes({MediaType.APPLICATION_JSON})
   @Produces({MediaType.APPLICATION_JSON})
@@ -126,13 +138,14 @@ public class ImageEndpoint extends WirgeEndPoint {
     verifyUserIsAdmin();
     return null; // create(something (entity));
   }
+  */
 
   @DELETE
-  @Path("{id}")
-  public void remove(@PathParam("id") Long id) {
-    logger.info(Thread.currentThread().getStackTrace()[1].getMethodName() + "(" + id + ")");
+  @Path("{idStoredImage}")
+  public void remove(@PathParam("id") Long idStoredImage) {
+    logger.info(Thread.currentThread().getStackTrace()[1].getMethodName() + "(" + idStoredImage + ")");
     // Admins only
     verifyUserIsAdmin();
-    ofy().delete().key(Key.create(UserMessage.class, id)).now();
+    ofy().delete().key(Key.create(StoredImage.class, idStoredImage)).now();
   }
 }

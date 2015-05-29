@@ -5,6 +5,8 @@ import com.googlecode.objectify.annotation.Entity;
 import com.googlecode.objectify.annotation.Id;
 import com.googlecode.objectify.annotation.Index;
 
+import java.util.Date;
+
 /**
  * Represents a stored image, can be used for
  * blogposts and (maybe) other things
@@ -16,6 +18,9 @@ public class StoredImage {
   private Long idStoredImage;
   @Index
   private String nmFile;
+  @Index
+  private Date dhCreated;
+
   private Blob baBytes;
   private Integer iOriginalW;
   private Integer iOriginalH;
@@ -58,5 +63,13 @@ public class StoredImage {
 
   public void setiOriginalH(Integer iOriginalH) {
     this.iOriginalH = iOriginalH;
+  }
+
+  public Date getDhCreated() {
+    return dhCreated;
+  }
+
+  public void setDhCreated(Date dhCreated) {
+    this.dhCreated = dhCreated;
   }
 }
