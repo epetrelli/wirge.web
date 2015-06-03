@@ -47,13 +47,26 @@
 
     </nav>
 
-    <h1>${nmTitle}</h1>
+    <div class="row">
+      <div class="col-sm-12">
+        <#if storedImages?size != 0>
+          <img class="img img-responsive img-rounded pull-left" style="margin:20px 20px 20px 0;" src="/blogImages/${ulLink?remove_ending(".html")}/360/${storedImages[0].nmFile}" alt="${nmTitle}">
+        </#if>
+        <h1>${nmTitle}</h1>
+      </div>
+    </div>
 
     <p class="lead">${nmSubtitle}</p>
 
     <hr>
 
     <p>${txText.value}</p>
+
+    <hr>
+
+    <p class="text-center">
+        <a class="btn btn-default" style="margin-top: 20px;" href="/blog.html"><span class="glyphicon glyphicon-chevron-left"></span>&nbsp;Torna al Blog</a>
+    </p>
 
 </div>
 
