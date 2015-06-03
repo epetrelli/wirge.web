@@ -55,18 +55,30 @@
 
     <#list blogPosts as blogPost>
       <#if blogPost.published>
-          <h2>${blogPost.nmTitle}</h2>
+        <div class="row">
+            <div class="col-sm-12">
+              <#if blogPost.storedImages?size != 0>
+                <a href="/blog/${blogPost.ulLink}">
+                  <img class="img img-responsive img-rounded pull-left" style="margin-right:10px;" src="/blogImages/${blogPost.ulLink?remove_ending(".html")}/240/${blogPost.storedImages[0].nmFile}" alt="${blogPost.nmTitle}">
+                </a>
+              </#if>
 
-          <h3>${blogPost.nmSubtitle}</h3>
+              <h2>${blogPost.nmTitle}</h2>
 
-          <p class="small">${blogPost.dhCreated?string('dd/MM/yyyy')}</p>
-          <p>
-        <#if blogPost.txText.value?length &gt; 250>
-          ${blogPost.txText.value[0..249]}... <a href="/blog/${blogPost.ulLink}">Continua <span class="glyphicon glyphicon-chevron-right"></span></a></p>
-        <#else>
-          ${blogPost.txText.value} <a href="/blog/${blogPost.ulLink}">Continua <span class="glyphicon glyphicon-chevron-right"></span></a>
-          </p>
-        </#if>
+              <h3>${blogPost.nmSubtitle}</h3>
+
+              <p class="small">${blogPost.dhCreated?string('dd/MM/yyyy')}</p>
+              <p>
+              <#if blogPost.txText.value?length &gt; 250>
+                ${blogPost.txText.value[0..249]}... <a href="/blog/${blogPost.ulLink}">Continua <span class="glyphicon glyphicon-chevron-right"></span></a></p>
+              <#else>
+                ${blogPost.txText.value} <a href="/blog/${blogPost.ulLink}">Continua <span class="glyphicon glyphicon-chevron-right"></span></a>
+                </p>
+              </#if>
+              <br class="clear:both;">
+            </div>
+        </div>
+        <hr>
       </#if>
     </#list>
 

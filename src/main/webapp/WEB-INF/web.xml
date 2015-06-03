@@ -82,6 +82,10 @@
     <servlet-name>ImagesServlet</servlet-name>
     <url-pattern>/storedImages/*</url-pattern>
   </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>ImagesServlet</servlet-name>
+    <url-pattern>/blogImages/*</url-pattern>
+  </servlet-mapping>
 
   <security-constraint>
     <web-resource-collection>

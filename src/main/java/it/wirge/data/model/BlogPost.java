@@ -5,7 +5,9 @@ import com.googlecode.objectify.annotation.Entity;
 import com.googlecode.objectify.annotation.Id;
 import com.googlecode.objectify.annotation.Index;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 /**
  * Represents a blog post, or a generic content page
@@ -26,6 +28,7 @@ public class BlogPost {
   private Date dhCreated;
   private String nmAuthor;
   private Boolean published;
+  private List<StoredImage> storedImages = new ArrayList<>();
 
   public Long getIdBlogPost() {
     return idBlogPost;
@@ -97,5 +100,13 @@ public class BlogPost {
 
   public void setPublished(Boolean published) {
     this.published = published;
+  }
+
+  public List<StoredImage> getStoredImages() {
+    return storedImages;
+  }
+
+  public void setStoredImages(List<StoredImage> storedImages) {
+    this.storedImages = storedImages;
   }
 }

@@ -120,11 +120,15 @@ public class ImageEndpoint extends WirgeEndPoint {
       }
       ofy().save().entity(storedImage).now();
 
-    } catch (Exception e) {
+    }
+    catch (ResourceException re) {
+      throw re;
+    }
+    catch (Exception e) {
       e.printStackTrace();
       throw e;
-      //TODO: manage image conflicts
     }
+
     return storedImage;
   }
 

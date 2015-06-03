@@ -7,6 +7,8 @@ import com.google.appengine.api.images.Transform;
 import freemarker.template.Configuration;
 import freemarker.template.Template;
 import freemarker.template.TemplateException;
+import it.wirge.Constants;
+import it.wirge.Utils;
 import it.wirge.data.model.BlogPost;
 import it.wirge.data.model.StoredImage;
 
@@ -36,20 +38,51 @@ public class ImagesServlet extends HttpServlet {
     throws ServletException, IOException {
 
     String sCompletePath = httpServletRequest.getRequestURI();
+    logger.info("Request for " + sCompletePath);
+
     String[] saCompletePath = sCompletePath.split("\\/");
     String nmFile = saCompletePath[saCompletePath.length-1];
     Integer iWidth = null;
+    StoredImage storedImage = null;
 
+    // Tries to find the width: if present, it is the token before image name
     try {
       iWidth = new Integer(saCompletePath[saCompletePath.length-2]);
     } catch (NumberFormatException e) {
       logger.info("Image size not specified");
     }
 
-    StoredImage storedImage = ofy().load().type(StoredImage.class).filter("nmFile", nmFile).first().now();
+    // Tries to retreive the image by name
+    storedImage = ofy().load().type(StoredImage.class).filter("nmFile", nmFile).first().now();
 
     if(storedImage == null) {
-      logger.info("Not found");
+      //logger.info("Not found by name: probably deleted; search by blogpost");
+      boolean useNext = false;
+      for(String sToken : saCompletePath){
+
+        if(useNext){
+          //logger.info("BlogPost: " + sToken);
+          BlogPost blogPost = ofy().load().type(BlogPost.class).filter("ulLink", Utils.toPrettyURL(sToken, Constants.EXTENSION_HTML)).first().now();
+          if(blogPost!=null){
+            for(StoredImage blogPostStoredImage : blogPost.getStoredImages()){
+              if(blogPostStoredImage.getNmFile().equals(nmFile)) {
+                storedImage = blogPostStoredImage;
+                break;
+              }
+            }
+          }
+          break;
+        }
+
+        if(sToken.equals("blogImages")){
+          //logger.info("blogImages token found");
+          useNext = true;
+        }
+
+      }
+    }
+
+    if(storedImage==null){
       httpServletResponse.sendError(HttpServletResponse.SC_NOT_FOUND);
       return;
     }

@@ -51,7 +51,7 @@ public class BlogPostEndpoint extends WirgeEndPoint {
   @Consumes({MediaType.APPLICATION_JSON})
   @Produces({MediaType.APPLICATION_JSON})
   public BlogPost create(BlogPost blogPost) {
-    logger.info(Thread.currentThread().getStackTrace()[1].getMethodName() + "()");
+    logger.info(Thread.currentThread().getStackTrace()[1].getMethodName() + "(" + blogPost.getNmTitle() + ") " + blogPost.getStoredImages().size() + " images");
 
     // Admins only
     verifyUserIsAdmin();
