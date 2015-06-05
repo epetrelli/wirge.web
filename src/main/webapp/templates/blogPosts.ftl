@@ -59,14 +59,15 @@
     <#list blogPosts as blogPost>
       <#if blogPost.published>
         <div class="row">
-            <div class="col-sm-12">
-              <#if blogPost.storedImage??>
-                <a href="/blog/${blogPost.ulLink}">
-                  <img class="img img-responsive img-rounded pull-left" style="margin-right:10px;" src="/blogImages/${blogPost.ulLink?remove_ending(".html")}/240/${blogPost.storedImage.nmFile}" alt="${blogPost.nmTitle}">
-                </a>
-              </#if>
-
-              <h2>${blogPost.nmTitle}</h2>
+            <div class="col-sm-12" style="cursor:pointer;" onclick="document.location='/blog/${blogPost.ulLink}';">
+              <h2>
+                <#if blogPost.storedImage??>
+                  <a href="/blog/${blogPost.ulLink}">
+                    <img class="img img-responsive img-rounded pull-left" style="margin-right:10px;" src="/blogImages/${blogPost.ulLink?remove_ending(".html")}/240/${blogPost.storedImage.nmFile}" alt="${blogPost.nmTitle}">
+                  </a>
+                </#if>
+                ${blogPost.nmTitle}
+              </h2>
 
               <h3>${blogPost.nmSubtitle}</h3>
 
@@ -91,7 +92,7 @@
 <div class="container">
     <footer class="footer">
         <p>
-            &copy; 2015 WIRGE &middot; PI 01351660996
+            &copy; 2015 WIRGE &middot; PI 01351660996 &middot; <a href="/privacy.html">Privacy</a>
             <a class="text-muted" style="margin:0 0 0 10px" href="https://www.facebook.com/wirge.it"><i class="fa fa-lg fa-facebook-square"></i></a>
             <a class="text-muted" style="margin:0 0 0 10px" href="https://www.linkedin.com/company/9225701"><i class="fa fa-lg fa-linkedin-square"></i></a>
             <a class="text-muted" style="margin:0 0 0 10px" href="https://plus.google.com/+WirgeItPlus/about"><i class="fa fa-lg fa-google-plus-square"></i></a>

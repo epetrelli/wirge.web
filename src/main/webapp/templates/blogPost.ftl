@@ -23,7 +23,7 @@
 
 <body>
 
-<div class="container">
+<div itemscope itemtype="http://schema.org/Article" class="container">
 
     <nav class="navbar navbar-default">
 
@@ -53,23 +53,16 @@
     <div class="row">
       <div class="col-sm-12">
         <#if storedImage??>
-            <img class="img img-responsive img-rounded pull-left" style="margin:20px 20px 20px 0;" src="/blogImages/${ulLink?remove_ending(".html")}/360/${storedImage.nmFile}" alt="${nmTitle}">
+            <img itemprop="image" class="img img-responsive img-rounded pull-left" style="margin:20px 20px 20px 0;" src="/blogImages/${ulLink?remove_ending(".html")}/360/${storedImage.nmFile}" alt="${nmTitle}">
         </#if>
-        <h1>${nmTitle}</h1>
+        <h1 itemprop="name">${nmTitle}</h1>
       </div>
     </div>
 
-    <p class="lead">${nmSubtitle}</p>
+    <p itemprop="articleSection" class="lead">${nmSubtitle}</p>
 
     <#if storedImages?size != 0>
       <hr>
-
-
-
-
-
-
-
       <div id="links">
         <#list storedImages as storedImage>
           <a href="/blogImages/${ulLink?remove_ending(".html")}/${storedImage.nmFile}" title="${nmTitle}" data-gallery>
@@ -113,9 +106,7 @@
     </#if>
 
     <hr>
-
-    <p>${txText.value}</p>
-
+    <span itemprop="articleBody"><p>${txText.value}</p></span>
     <hr>
 
     <p class="text-center">
@@ -127,7 +118,7 @@
 <div class="container">
     <footer class="footer">
         <p>
-            &copy; 2015 WIRGE &middot; PI 01351660996
+            &copy; 2015 WIRGE &middot; PI 01351660996 &middot; <a href="/privacy.html">Privacy</a>
             <a class="text-muted" style="margin:0 0 0 10px" href="https://www.facebook.com/wirge.it"><i class="fa fa-lg fa-facebook-square"></i></a>
             <a class="text-muted" style="margin:0 0 0 10px" href="https://www.linkedin.com/company/9225701"><i class="fa fa-lg fa-linkedin-square"></i></a>
             <a class="text-muted" style="margin:0 0 0 10px" href="https://plus.google.com/+WirgeItPlus/about"><i class="fa fa-lg fa-google-plus-square"></i></a>

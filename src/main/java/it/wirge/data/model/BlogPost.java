@@ -22,12 +22,13 @@ public class BlogPost {
   private Long idBlogPost;
   @Index
   private String ulLink;
+  @Index
+  private Date dhCreated;
 
   private String nmTitle;
   private String nmSubtitle;
   private String nmDescription;
   private Text txText;
-  private Date dhCreated;
   private String nmAuthor;
   private Boolean published;
   private StoredImage storedImage;

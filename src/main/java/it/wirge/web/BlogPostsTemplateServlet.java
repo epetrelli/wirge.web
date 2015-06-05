@@ -37,7 +37,7 @@ public class BlogPostsTemplateServlet extends HttpServlet {
     throws ServletException, IOException {
 
     Map<String, Object> model = new HashMap<String, Object>();
-    List<BlogPost> blogPosts = ofy().load().type(BlogPost.class).list();
+    List<BlogPost> blogPosts = ofy().load().type(BlogPost.class).order("-dhCreated").list();
     model.put("blogPosts", blogPosts);
 
     // Get the templat object
