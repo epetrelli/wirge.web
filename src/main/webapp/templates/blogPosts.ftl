@@ -9,6 +9,9 @@
     <!-- build:css(.tmp) /styles/vendor.css -->
     <!-- bower:css -->
     <link rel="stylesheet" href="/bower_components/leaflet/dist/leaflet.css" />
+    <link rel="stylesheet" href="/bower_components/blueimp-gallery/css/blueimp-gallery.css" />
+    <link rel="stylesheet" href="/bower_components/blueimp-gallery/css/blueimp-gallery-indicator.css" />
+    <link rel="stylesheet" href="/bower_components/blueimp-gallery/css/blueimp-gallery-video.css" />
     <!-- endbower -->
     <!-- endbuild -->
 
@@ -57,9 +60,9 @@
       <#if blogPost.published>
         <div class="row">
             <div class="col-sm-12">
-              <#if blogPost.storedImages?size != 0>
+              <#if blogPost.storedImage??>
                 <a href="/blog/${blogPost.ulLink}">
-                  <img class="img img-responsive img-rounded pull-left" style="margin-right:10px;" src="/blogImages/${blogPost.ulLink?remove_ending(".html")}/240/${blogPost.storedImages[0].nmFile}" alt="${blogPost.nmTitle}">
+                  <img class="img img-responsive img-rounded pull-left" style="margin-right:10px;" src="/blogImages/${blogPost.ulLink?remove_ending(".html")}/240/${blogPost.storedImage.nmFile}" alt="${blogPost.nmTitle}">
                 </a>
               </#if>
 
@@ -118,6 +121,13 @@
 <script src="/bower_components/leaflet/dist/leaflet.js"></script>
 <script src="/bower_components/leaflet/dist/leaflet-src.js"></script>
 <script src="/bower_components/angularytics/dist/angularytics.min.js"></script>
+<script src="/bower_components/blueimp-gallery/js/blueimp-helper.js"></script>
+<script src="/bower_components/blueimp-gallery/js/blueimp-gallery.js"></script>
+<script src="/bower_components/blueimp-gallery/js/blueimp-gallery-fullscreen.js"></script>
+<script src="/bower_components/blueimp-gallery/js/blueimp-gallery-indicator.js"></script>
+<script src="/bower_components/blueimp-gallery/js/blueimp-gallery-video.js"></script>
+<script src="/bower_components/blueimp-gallery/js/blueimp-gallery-vimeo.js"></script>
+<script src="/bower_components/blueimp-gallery/js/blueimp-gallery-youtube.js"></script>
 <!-- endbower -->
 <!-- endbuild -->
 

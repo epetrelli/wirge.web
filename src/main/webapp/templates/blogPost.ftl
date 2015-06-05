@@ -9,6 +9,9 @@
   <!-- build:css(.tmp) /styles/vendor.css -->
   <!-- bower:css -->
   <link rel="stylesheet" href="/bower_components/leaflet/dist/leaflet.css" />
+  <link rel="stylesheet" href="/bower_components/blueimp-gallery/css/blueimp-gallery.css" />
+  <link rel="stylesheet" href="/bower_components/blueimp-gallery/css/blueimp-gallery-indicator.css" />
+  <link rel="stylesheet" href="/bower_components/blueimp-gallery/css/blueimp-gallery-video.css" />
   <!-- endbower -->
   <!-- endbuild -->
 
@@ -49,14 +52,65 @@
 
     <div class="row">
       <div class="col-sm-12">
-        <#if storedImages?size != 0>
-          <img class="img img-responsive img-rounded pull-left" style="margin:20px 20px 20px 0;" src="/blogImages/${ulLink?remove_ending(".html")}/360/${storedImages[0].nmFile}" alt="${nmTitle}">
+        <#if storedImage??>
+            <img class="img img-responsive img-rounded pull-left" style="margin:20px 20px 20px 0;" src="/blogImages/${ulLink?remove_ending(".html")}/360/${storedImage.nmFile}" alt="${nmTitle}">
         </#if>
         <h1>${nmTitle}</h1>
       </div>
     </div>
 
     <p class="lead">${nmSubtitle}</p>
+
+    <#if storedImages?size != 0>
+      <hr>
+
+
+
+
+
+
+
+      <div id="links">
+        <#list storedImages as storedImage>
+          <a href="/blogImages/${ulLink?remove_ending(".html")}/${storedImage.nmFile}" title="${nmTitle}" data-gallery>
+              <img class="img img-rounded" src="/blogImages/${ulLink?remove_ending(".html")}/80/${storedImage.nmFile}" alt="${nmTitle}">
+          </a>
+        </#list>
+      </div>
+      <div id="blueimp-gallery" class="blueimp-gallery blueimp-gallery-controls">
+          <!-- The container for the modal slides -->
+          <div class="slides"></div>
+          <!-- Controls for the borderless lightbox -->
+          <h3 class="title"></h3>
+          <a class="prev">‹</a>
+          <a class="next">›</a>
+          <a class="close">×</a>
+          <a class="play-pause"></a>
+          <ol class="indicator"></ol>
+          <!-- The modal dialog, which will be used to wrap the lightbox content -->
+          <div class="modal fade">
+              <div class="modal-dialog">
+                  <div class="modal-content">
+                      <div class="modal-header">
+                          <button type="button" class="close" aria-hidden="true">&times;</button>
+                          <h4 class="modal-title"></h4>
+                      </div>
+                      <div class="modal-body next"></div>
+                      <div class="modal-footer">
+                          <button type="button" class="btn btn-default pull-left prev">
+                              <i class="glyphicon glyphicon-chevron-left"></i>
+                              Previous
+                          </button>
+                          <button type="button" class="btn btn-primary next">
+                              Next
+                              <i class="glyphicon glyphicon-chevron-right"></i>
+                          </button>
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </div>
+    </#if>
 
     <hr>
 
@@ -103,6 +157,13 @@
 <script src="/bower_components/leaflet/dist/leaflet.js"></script>
 <script src="/bower_components/leaflet/dist/leaflet-src.js"></script>
 <script src="/bower_components/angularytics/dist/angularytics.min.js"></script>
+<script src="/bower_components/blueimp-gallery/js/blueimp-helper.js"></script>
+<script src="/bower_components/blueimp-gallery/js/blueimp-gallery.js"></script>
+<script src="/bower_components/blueimp-gallery/js/blueimp-gallery-fullscreen.js"></script>
+<script src="/bower_components/blueimp-gallery/js/blueimp-gallery-indicator.js"></script>
+<script src="/bower_components/blueimp-gallery/js/blueimp-gallery-video.js"></script>
+<script src="/bower_components/blueimp-gallery/js/blueimp-gallery-vimeo.js"></script>
+<script src="/bower_components/blueimp-gallery/js/blueimp-gallery-youtube.js"></script>
 <!-- endbower -->
 <!-- endbuild -->
 

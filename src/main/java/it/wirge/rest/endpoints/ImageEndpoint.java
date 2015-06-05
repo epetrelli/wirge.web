@@ -42,22 +42,6 @@ public class ImageEndpoint extends WirgeEndPoint {
     return ofy().load().type(StoredImage.class).order("-dhCreated").list();
   }
 
-/*
-  @GET
-  @Path("uploadUrl")
-  @Produces({MediaType.APPLICATION_JSON})
-  public UploadUrl getUploadUrl() {
-    logger.info(Thread.currentThread().getStackTrace()[1].getMethodName() + "()");
-    // Admins only
-    verifyUserIsAdmin();
-
-    UploadUrl uploadUrl = new UploadUrl();
-    BlobstoreService blobstoreService = BlobstoreServiceFactory.getBlobstoreService();
-    uploadUrl.setUrl(blobstoreService.createUploadUrl("/upload"));
-    return uploadUrl;
-  }
-*/
-
   @GET
   @Path("{id}")
   @Produces({MediaType.APPLICATION_JSON})
@@ -78,6 +62,9 @@ public class ImageEndpoint extends WirgeEndPoint {
   @Produces({MediaType.APPLICATION_JSON})
   public StoredImage create(Representation entity) throws UnsupportedEncodingException, FileUploadException {
     logger.info(Thread.currentThread().getStackTrace()[1].getMethodName() + "()");
+
+    // Admins only
+    verifyUserIsAdmin();
 
     // 1/ Create a factory for disk-based file items
     DiskFileItemFactory factory = new DiskFileItemFactory();
@@ -131,18 +118,6 @@ public class ImageEndpoint extends WirgeEndPoint {
 
     return storedImage;
   }
-
-  /*
-  @PUT
-  @Consumes({MediaType.APPLICATION_JSON})
-  @Produces({MediaType.APPLICATION_JSON})
-  public UserMessage update(UserMessage userMessage) {
-    logger.info(Thread.currentThread().getStackTrace()[1].getMethodName() + "()");
-    // Admins only
-    verifyUserIsAdmin();
-    return null; // create(something (entity));
-  }
-  */
 
   @DELETE
   @Path("{idStoredImage}")

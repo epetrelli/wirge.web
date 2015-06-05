@@ -10,7 +10,9 @@ import java.util.Date;
 import java.util.List;
 
 /**
- * Represents a blog post, or a generic content page
+ * Represents a blog post, or a generic content page;
+ * storedImage is the main image,
+ * storedImageS represents the image gallery
  */
 
 @Entity
@@ -28,6 +30,7 @@ public class BlogPost {
   private Date dhCreated;
   private String nmAuthor;
   private Boolean published;
+  private StoredImage storedImage;
   private List<StoredImage> storedImages = new ArrayList<>();
 
   public Long getIdBlogPost() {
@@ -100,6 +103,14 @@ public class BlogPost {
 
   public void setPublished(Boolean published) {
     this.published = published;
+  }
+
+  public StoredImage getStoredImage() {
+    return storedImage;
+  }
+
+  public void setStoredImage(StoredImage storedImage) {
+    this.storedImage = storedImage;
   }
 
   public List<StoredImage> getStoredImages() {
