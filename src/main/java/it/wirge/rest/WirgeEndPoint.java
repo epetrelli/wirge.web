@@ -34,6 +34,7 @@ public class WirgeEndPoint extends ServerResource {
           }
         }
       }
+      logger.info("Admin cookie NOT found: 403");
       throw new ResourceException(
         Status.CLIENT_ERROR_FORBIDDEN,
         Constants.ERROR_UNAUTHORIZED

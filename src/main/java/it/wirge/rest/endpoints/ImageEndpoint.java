@@ -64,7 +64,7 @@ public class ImageEndpoint extends WirgeEndPoint {
     logger.info(Thread.currentThread().getStackTrace()[1].getMethodName() + "()");
 
     // Admins only
-    verifyUserIsAdmin();
+    // verifyUserIsAdmin(); suspended as fails with upload
 
     // 1/ Create a factory for disk-based file items
     DiskFileItemFactory factory = new DiskFileItemFactory();
@@ -109,6 +109,7 @@ public class ImageEndpoint extends WirgeEndPoint {
 
     }
     catch (ResourceException re) {
+      re.printStackTrace();
       throw re;
     }
     catch (Exception e) {
