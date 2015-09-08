@@ -41,11 +41,14 @@ WirgeApp.controller('UserMessageController', ['$scope', '$window', 'UserMessageS
         attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
       }).addTo(map);
       // add a marker in the given location, attach some popup content to it and open the popup
+
+      var content = '<img alt="WIRGE" src="/images/wirge_pict.png" style="width:52px; height: 17px;">';
+
       L.marker([45.423786, 9.168037]).addTo(map)
-        .bindPopup('<img alt="WIRGE" src="/images/wirge_logo.png">')
-        .openPopup();
+        .bindPopup(content);
+
       L.marker([45.490904, 9.204557]).addTo(map)
-        .bindPopup('<img alt="WIRGE" src="/images/wirge_logo.png">')
+        .bindPopup(content)
         .openPopup();
     }
   }]);
